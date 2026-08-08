@@ -1,0 +1,533 @@
+/* ============================================
+   DHUNI — Global Stylesheet
+   Hand-written CSS, no utility classes
+   ============================================ */
+
+/* Font faces — self-hosted, subsetted
+   IMPORTANT: Currently using Google Fonts fallback (see Base.astro).
+   Before production deploy:
+   1. Subset fonts (see public/fonts/README.md)
+   2. Place WOFF2 files in public/fonts/
+   3. Uncomment @font-face declarations below
+   4. Remove Google Fonts link from Base.astro */
+
+/*
+@font-face {
+  font-family: 'Tiro Devanagari Hindi Local';
+  src: url('/fonts/tiro-devanagari-hindi-subset.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Crimson Pro Local';
+  src: url('/fonts/crimson-pro-subset.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Crimson Pro Local';
+  src: url('/fonts/crimson-pro-semibold-subset.woff2') format('woff2');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+*/
+
+/* ============================================
+   Design Tokens
+   ============================================ */
+
+:root {
+  /* Colors — dhuni palette */
+  --bg-charcoal: #1a1612;
+  --text-warm-white: #e8e3dc;
+  --ember-accent: #d4663a;
+  --ash-grey: #6b6760;
+  --saffron-deep: #c27c3a;
+
+  /* Typography */
+  --font-devanagari: 'Tiro Devanagari Hindi', serif;
+  --font-latin: 'Crimson Pro', Georgia, serif;
+
+  /* Spacing */
+  --space-xs: 0.5rem;
+  --space-sm: 1rem;
+  --space-md: 1.5rem;
+  --space-lg: 2.5rem;
+  --space-xl: 4rem;
+
+  /* Layout */
+  --max-width: 680px;
+}
+
+/* ============================================
+   Reset & Base
+   ============================================ */
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 100%;
+  -webkit-text-size-adjust: 100%;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  background: var(--bg-charcoal);
+  color: var(--text-warm-white);
+  font-family: var(--font-latin);
+  font-size: 1.125rem;
+  line-height: 1.7;
+  min-height: 100vh;
+}
+
+/* ============================================
+   Typography
+   ============================================ */
+
+/* Devanagari needs extra line-height */
+[lang="hi"],
+.devanagari {
+  font-family: var(--font-devanagari);
+  line-height: 1.9;
+  letter-spacing: 0.01em;
+  font-feature-settings: "kern" 1, "liga" 1;
+}
+
+/* English spans within Hindi context */
+[lang="hi"] [lang="en"] {
+  font-family: var(--font-latin);
+  line-height: 1.6;
+}
+
+h1, h2, h3, h4 {
+  font-weight: 400;
+  line-height: 1.2;
+  margin-bottom: var(--space-sm);
+}
+
+h1 {
+  font-size: 3rem;
+  margin-bottom: var(--space-md);
+}
+
+h2 {
+  font-size: 1.75rem;
+  margin-top: var(--space-lg);
+}
+
+h3 {
+  font-size: 1.375rem;
+  color: var(--ash-grey);
+  font-weight: 600;
+}
+
+p {
+  margin-bottom: var(--space-sm);
+}
+
+a {
+  color: var(--ember-accent);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+a:hover {
+  color: var(--saffron-deep);
+  text-decoration: underline;
+}
+
+a:focus {
+  outline: 2px solid var(--ember-accent);
+  outline-offset: 2px;
+}
+
+/* ============================================
+   Layout
+   ============================================ */
+
+.container {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 var(--space-sm);
+}
+
+@media (min-width: 640px) {
+  .container {
+    padding: 0 var(--space-lg);
+  }
+}
+
+/* ============================================
+   Header
+   ============================================ */
+
+.site-header {
+  padding: var(--space-lg) 0;
+  text-align: center;
+}
+
+.site-title {
+  font-size: 4.5rem;
+  line-height: 1.1;
+  margin-bottom: var(--space-xs);
+  color: var(--text-warm-white);
+}
+
+@media (max-width: 480px) {
+  .site-title {
+    font-size: 3rem;
+  }
+}
+
+.site-title-roman {
+  font-size: 1rem;
+  letter-spacing: 0.15em;
+  color: var(--ash-grey);
+  text-transform: uppercase;
+  display: block;
+  margin-top: var(--space-xs);
+}
+
+.site-tagline {
+  font-size: 1.5rem;
+  margin-top: var(--space-md);
+  color: var(--ember-accent);
+}
+
+.site-tagline-gloss {
+  font-size: 0.95rem;
+  color: var(--ash-grey);
+  margin-top: var(--space-xs);
+  font-style: italic;
+}
+
+/* ============================================
+   Primary Action
+   ============================================ */
+
+.primary-action {
+  text-align: center;
+  padding: var(--space-xl) 0;
+}
+
+.primary-link {
+  display: inline-block;
+  font-size: 1.25rem;
+  padding: 1rem 2rem;
+  background: var(--ember-accent);
+  color: var(--bg-charcoal);
+  border-radius: 4px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: background 0.2s ease;
+}
+
+.primary-link:hover {
+  background: var(--saffron-deep);
+  text-decoration: none;
+}
+
+/* ============================================
+   Releases List
+   ============================================ */
+
+.releases-section {
+  padding: var(--space-xl) 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.section-title {
+  font-size: 1.125rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ash-grey);
+  margin-bottom: var(--space-lg);
+}
+
+.releases-list {
+  list-style: none;
+}
+
+.release-item {
+  margin-bottom: var(--space-lg);
+  padding-bottom: var(--space-lg);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.release-item:last-child {
+  border-bottom: none;
+}
+
+.release-title {
+  font-size: 1.75rem;
+  margin-bottom: 0.25rem;
+}
+
+.release-title a {
+  color: var(--text-warm-white);
+  text-decoration: none;
+}
+
+.release-title a:hover {
+  color: var(--ember-accent);
+}
+
+.release-title-roman {
+  font-size: 1.125rem;
+  color: var(--ash-grey);
+  font-style: italic;
+  display: block;
+  margin-top: 0.25rem;
+}
+
+.release-meta {
+  font-size: 0.95rem;
+  color: var(--ash-grey);
+  margin-top: var(--space-xs);
+}
+
+.release-meta span:not(:last-child)::after {
+  content: " • ";
+  margin: 0 0.5rem;
+}
+
+.empty-state {
+  text-align: center;
+  padding: var(--space-xl) 0;
+  color: var(--ash-grey);
+  font-style: italic;
+}
+
+/* ============================================
+   Release Detail Page
+   ============================================ */
+
+.release-header {
+  padding: var(--space-xl) 0 var(--space-lg);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.release-detail-title {
+  font-size: 3rem;
+  line-height: 1.2;
+  margin-bottom: var(--space-xs);
+}
+
+@media (max-width: 480px) {
+  .release-detail-title {
+    font-size: 2rem;
+  }
+}
+
+.release-metadata {
+  margin-top: var(--space-lg);
+}
+
+.metadata-grid {
+  display: grid;
+  gap: var(--space-sm);
+  margin-top: var(--space-md);
+}
+
+.metadata-item {
+  display: flex;
+  gap: var(--space-sm);
+}
+
+.metadata-label {
+  font-weight: 600;
+  color: var(--ash-grey);
+  min-width: 120px;
+}
+
+.metadata-value {
+  color: var(--text-warm-white);
+}
+
+/* YouTube embed alternative — static thumbnail link */
+.youtube-thumbnail {
+  margin: var(--space-lg) 0;
+  position: relative;
+  display: block;
+}
+
+.youtube-thumbnail img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 4px;
+}
+
+.youtube-thumbnail::after {
+  content: '▶';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 4rem;
+  color: white;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.6);
+  pointer-events: none;
+}
+
+/* Streaming links */
+.streaming-links {
+  margin: var(--space-lg) 0;
+  display: flex;
+  gap: var(--space-sm);
+  flex-wrap: wrap;
+}
+
+.streaming-link {
+  display: inline-block;
+  padding: 0.5rem 1rem;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 4px;
+  font-size: 0.95rem;
+  transition: background 0.2s ease;
+}
+
+.streaming-link:hover {
+  background: rgba(255, 255, 255, 0.1);
+  text-decoration: none;
+}
+
+/* Credits */
+.credits {
+  margin: var(--space-lg) 0;
+  padding: var(--space-md);
+  background: rgba(255, 255, 255, 0.02);
+  border-radius: 4px;
+}
+
+.credits-list {
+  list-style: none;
+  margin-top: var(--space-sm);
+}
+
+.credits-list li {
+  margin-bottom: var(--space-xs);
+}
+
+.credits-list strong {
+  color: var(--ash-grey);
+  font-weight: 600;
+}
+
+/* Rights attribution */
+.rights-note {
+  margin: var(--space-md) 0;
+  padding: var(--space-sm);
+  background: rgba(212, 102, 58, 0.1);
+  border-left: 3px solid var(--ember-accent);
+  font-size: 0.95rem;
+  color: var(--ash-grey);
+}
+
+/* Lyrics */
+.lyrics-section {
+  margin: var(--space-xl) 0;
+  padding: var(--space-xl) 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.lyrics-section h2 {
+  font-size: 1.5rem;
+  margin-bottom: var(--space-md);
+  color: var(--ember-accent);
+}
+
+.lyrics-section p {
+  margin-bottom: var(--space-md);
+  white-space: pre-line;
+}
+
+/* ============================================
+   Bookings Section
+   ============================================ */
+
+.bookings-section {
+  padding: var(--space-xl) 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  text-align: center;
+}
+
+.bookings-text {
+  margin-bottom: var(--space-sm);
+}
+
+/* ============================================
+   Footer
+   ============================================ */
+
+.site-footer {
+  padding: var(--space-xl) 0 var(--space-lg);
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  text-align: center;
+  font-size: 0.95rem;
+  color: var(--ash-grey);
+}
+
+.footer-links {
+  list-style: none;
+  display: flex;
+  justify-content: center;
+  gap: var(--space-md);
+  margin-bottom: var(--space-md);
+  flex-wrap: wrap;
+}
+
+.footer-credits {
+  font-size: 0.875rem;
+  margin-top: var(--space-sm);
+}
+
+/* ============================================
+   Utility Classes
+   ============================================ */
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+/* ============================================
+   Mobile Optimizations (320px minimum)
+   ============================================ */
+
+@media (max-width: 320px) {
+  body {
+    font-size: 1rem;
+  }
+
+  .site-title {
+    font-size: 2.5rem;
+  }
+
+  .release-detail-title {
+    font-size: 1.75rem;
+  }
+
+  .primary-link {
+    font-size: 1.125rem;
+    padding: 0.875rem 1.5rem;
+  }
+}

@@ -1,0 +1,128 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../layouts/Base.astro';
+
+// Get all non-draft releases, sorted by date descending
+const releases = (await getCollection('releases'))
+  .filter(release => !release.data.draft)
+  .sort((a, b) => b.data.release_date.getTime() - a.data.release_date.getTime());
+
+// JSON-LD for MusicGroup
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'MusicGroup',
+  name: 'Dhuni',
+  alternateName: 'धूनी',
+  genre: 'Bhajan',
+  url: 'https://dhunilive.com',
+  sameAs: [
+    'https://youtube.com/@dhunilive',
+    'https://instagram.com/dhunilive',
+  ],
+  description: 'Hindi devotional music imprint focusing on traditional bhajans with regional authenticity',
+};
+
+const title = 'धूनी — Dhuni';
+const description = 'बहुत पुराने रास्ते, नए भजन | Very old paths, new bhajans — Hindi devotional music with regional authenticity';
+---
+
+<Base title={title} description={description} jsonLd={jsonLd}>
+
+  <!-- Header -->
+  <header class="site-header">
+    <div class="container">
+      <h1 class="site-title" lang="hi">धूनी</h1>
+      <span class="site-title-roman" lang="en">Dhuni</span>
+
+      <p class="site-tagline" lang="hi">सबके आराध्य भजन</p>
+      <p class="site-tagline-gloss" lang="en">Bhajans for everyone's worship</p>
+    </div>
+  </header>
+
+  <!-- Primary Action — YouTube Channel -->
+  <section class="primary-action">
+    <div class="container">
+      <a
+        href="https://youtube.com/@dhunilive"
+        class="primary-link"
+        target="_blank"
+        rel="noopener noreferrer"
+        lang="en"
+      >
+        Watch on YouTube
+      </a>
+    </div>
+  </section>
+
+  <!-- Releases List -->
+  <section class="releases-section">
+    <div class="container">
+      <h2 class="section-title" lang="en">Releases</h2>
+
+      {releases.length > 0 ? (
+        <ul class="releases-list">
+          {releases.map((release) => (
+            <li class="release-item">
+              <h3 class="release-title">
+                <a href={`/${release.slug}`} lang="hi">
+                  {release.data.title_hi}
+                </a>
+                <span class="release-title-roman" lang="en">
+                  {release.data.title_roman}
+                </span>
+              </h3>
+              <div class="release-meta" lang="en">
+                <span>{release.data.deity}</span>
+                <span>{release.data.dialect}</span>
+                <span>{release.data.year}</span>
+              </div>
+            </li>
+          ))}
+        </ul>
+      ) : (
+        <p class="empty-state" lang="hi">
+          जल्द ही भजन आएंगे<br>
+          <span lang="en">New releases coming soon</span>
+        </p>
+      )}
+    </div>
+  </section>
+
+  <!-- Bookings -->
+  <section class="bookings-section">
+    <div class="container">
+      <p class="bookings-text" lang="hi">
+        जगरन और सत्संग के लिए उपलब्ध
+      </p>
+      <p class="bookings-text" lang="en">
+        Available for jagran and satsang
+      </p>
+      <a href="mailto:hello@dhunilive.com" lang="en">hello@dhunilive.com</a>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="container">
+      <ul class="footer-links">
+        <li>
+          <a
+            href="https://instagram.com/dhunilive"
+            target="_blank"
+            rel="noopener noreferrer"
+            lang="en"
+          >
+            Instagram
+          </a>
+        </li>
+        <li>
+          <a href="mailto:hello@dhunilive.com" lang="en">Email</a>
+        </li>
+      </ul>
+      <p class="footer-credits">
+        <span lang="hi">धूनी</span> <span lang="en">— A perpetual fire, tended so it never goes out</span>
+      </p>
+    </div>
+  </footer>
+
+</Base>
