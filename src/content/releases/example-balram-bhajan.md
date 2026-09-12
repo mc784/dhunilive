@@ -19,7 +19,7 @@ credits:
   lyrics: "Traditional"
   music: "Placeholder Composer"
   chorus: "Dhuni Collective"
-draft: false
+draft: true
 ---
 
 <!-- PLACEHOLDER RELEASE — Replace with actual content -->

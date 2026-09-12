@@ -7,122 +7,247 @@ const releases = (await getCollection('releases'))
   .filter(release => !release.data.draft)
   .sort((a, b) => b.data.release_date.getTime() - a.data.release_date.getTime());
 
+const featuredRelease = releases.find(r => r.data.featured) || releases[0];
+
 // JSON-LD for MusicGroup
 const jsonLd = {
   '@context': 'https://schema.org',
   '@type': 'MusicGroup',
-  name: 'Dhuni',
-  alternateName: 'धूनी',
-  genre: 'Bhajan',
+  name: 'Dhuni Live',
+  alternateName: 'धूनी लाइव',
+  genre: 'Indian Classical / Devotional / Bhajan',
   url: 'https://dhunilive.com',
   sameAs: [
-    'https://youtube.com/@dhunilive',
-    'https://instagram.com/dhunilive',
+    'https://youtube.com/@DhuniLive',
+    'https://instagram.com/dhunilive.official',
   ],
-  description: 'Hindi devotional music imprint focusing on traditional bhajans with regional authenticity',
+  description: 'Sacred Sanskrit shlokas, stutis, and traditional Indian devotional acoustics presented with sattvic reverence and world-class fidelity.',
 };
 
-const title = 'धूनी — Dhuni';
-const description = 'बहुत पुराने रास्ते, नए भजन | Very old paths, new bhajans — Hindi devotional music with regional authenticity';
+const title = 'धूनी लाइव • Dhuni Live — Sacred Indian Devotional Music & Vedic Chants';
+const description = 'बहुत पुराने रास्ते, नए भजन | Sacred Sanskrit shlokas, dhyana chanting loops, and traditional Indian devotional acoustics.';
 ---
 
 <Base title={title} description={description} jsonLd={jsonLd}>
 
-  <!-- Header -->
-  <header class="site-header">
-    <div class="container">
-      <h1 class="site-title" lang="hi">धूनी</h1>
-      <span class="site-title-roman" lang="en">Dhuni</span>
-
-      <p class="site-tagline" lang="hi">आपके आराध्यों के भजन</p>
-      <p class="site-tagline-gloss" lang="en">Bhajans for your chosen deities</p>
-    </div>
-  </header>
-
-  <!-- Primary Action — YouTube Channel -->
-  <section class="primary-action">
-    <div class="container">
-      <a
-        href="https://youtube.com/@dhunilive"
-        class="primary-link"
-        target="_blank"
-        rel="noopener noreferrer"
-        lang="en"
-      >
-        Watch on YouTube
+  <!-- Top Navigation Bar -->
+  <nav class="site-nav">
+    <div class="container-wide site-nav-inner">
+      <a href="/" class="brand-badge">
+        <img src="/media/dhuni_logo.png" alt="Dhuni Live Emblem" class="brand-emblem" />
+        <div class="brand-text">
+          <span class="brand-title-hi">धूनी</span>
+          <span class="brand-title-en">Dhuni Live</span>
+        </div>
       </a>
-    </div>
-  </section>
 
-  <!-- Releases List -->
-  <section class="releases-section">
-    <div class="container">
-      <h2 class="section-title" lang="en">Releases</h2>
-
-      {releases.length > 0 ? (
-        <ul class="releases-list">
-          {releases.map((release) => (
-            <li class="release-item">
-              <h3 class="release-title">
-                <a href={`/${release.slug}`} lang="hi">
-                  {release.data.title_hi}
-                </a>
-                <span class="release-title-roman" lang="en">
-                  {release.data.title_roman}
-                </span>
-              </h3>
-              <div class="release-meta" lang="en">
-                <span>{release.data.deity}</span>
-                <span>{release.data.dialect}</span>
-                <span>{release.data.year}</span>
-              </div>
-            </li>
-          ))}
-        </ul>
-      ) : (
-        <p class="empty-state" lang="hi">
-          जल्द ही भजन आएंगे<br>
-          <span lang="en">New releases coming soon</span>
-        </p>
-      )}
-    </div>
-  </section>
-
-  <!-- Bookings -->
-  <section class="bookings-section">
-    <div class="container">
-      <p class="bookings-text" lang="hi">
-        जगरन और सत्संग के लिए उपलब्ध
-      </p>
-      <p class="bookings-text" lang="en">
-        Available for jagran and satsang
-      </p>
-      <a href="mailto:hello@dhunilive.com" lang="en">hello@dhunilive.com</a>
-    </div>
-  </section>
-
-  <!-- Footer -->
-  <footer class="site-footer">
-    <div class="container">
-      <ul class="footer-links">
+      <ul class="nav-links">
+        <li><a href="#releases">प्रस्तुतियाँ (Catalog)</a></li>
+        <li><a href="https://youtube.com/@DhuniLive" target="_blank" rel="noopener noreferrer">यूट्यूब</a></li>
+        <li><a href="https://instagram.com/dhunilive.official" target="_blank" rel="noopener noreferrer">इंस्टाग्राम</a></li>
         <li>
-          <a
-            href="https://instagram.com/dhunilive"
-            target="_blank"
-            rel="noopener noreferrer"
-            lang="en"
-          >
-            Instagram
+          <a href="#community" class="nav-cta-btn">
+            <span>🌿</span>
+            <span>व्हाट्सएप चैनल</span>
           </a>
         </li>
-        <li>
-          <a href="mailto:hello@dhunilive.com" lang="en">Email</a>
-        </li>
       </ul>
-      <p class="footer-credits">
-        <span lang="hi">धूनी</span> <span lang="en">— A perpetual fire, tended so it never goes out</span>
+    </div>
+  </nav>
+
+  <!-- Hero Theater (Featured Offering) -->
+  {featuredRelease && (
+    <section class="hero-theater">
+      <div class="container-wide">
+        <div class="hero-card">
+          <div class="hero-grid">
+
+            <!-- Video Player Theater Column -->
+            <div class="hero-media-wrap">
+              <div class="video-stage-16x9" id="heroVideoStage">
+                <div
+                  class="lite-embed-facade"
+                  id="heroFacade"
+                  style={`background-image: url('${featuredRelease.data.hero_image || featuredRelease.data.cover_image || `https://i.ytimg.com/vi/${featuredRelease.data.youtube_id}/maxresdefault.jpg`}');`}
+                  onclick={`playHeroVideo('${featuredRelease.data.youtube_short_id || featuredRelease.data.youtube_id}')`}
+                >
+                  <div class="play-button-gold" title="Play Video">
+                    <svg viewBox="0 0 24 24">
+                      <path d="M8 5v14l11-7z"/>
+                    </svg>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Hero Information Column -->
+            <div class="hero-info-wrap">
+              <span class="sacred-badge">॥ विशेष प्रस्तुति • Featured Release ॥</span>
+              
+              <h1 class="hero-title-hi" lang="hi">
+                {featuredRelease.data.title_hi}
+              </h1>
+              <p class="hero-title-en" lang="en">
+                {featuredRelease.data.title_roman}
+              </p>
+
+              <div class="hero-meta-row">
+                <span class="hero-meta-pill">आराध्य: {featuredRelease.data.deity}</span>
+                <span class="hero-meta-pill">भाषा: {featuredRelease.data.dialect}</span>
+                {featuredRelease.data.raga && (
+                  <span class="hero-meta-pill">राग: {featuredRelease.data.raga}</span>
+                )}
+                {featuredRelease.data.taal && (
+                  <span class="hero-meta-pill">ताल: {featuredRelease.data.taal}</span>
+                )}
+              </div>
+
+              <div class="hero-actions">
+                <a href={`/${featuredRelease.slug}`} class="btn-gold">
+                  <span>श्रवण एवं सम्पूर्ण भावार्थ</span>
+                  <span>→</span>
+                </a>
+                <a
+                  href={`https://youtube.com/watch?v=${featuredRelease.data.youtube_id}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="btn-subtle"
+                >
+                  <span>YouTube पर देखें</span>
+                  <span>↗</span>
+                </a>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </section>
+  )}
+
+  <!-- Catalog Section -->
+  <section class="catalog-section" id="releases">
+    <div class="container-wide">
+      <div class="catalog-header">
+        <div>
+          <h2 class="catalog-title-hi" lang="hi">पावन प्रस्तुतियाँ</h2>
+          <span class="catalog-title-en" lang="en">Sacred Releases & Chants</span>
+        </div>
+        <span class="hero-meta-pill" style="font-size: 0.85rem;">
+          {releases.length} कृतियाँ उपलब्ध
+        </span>
+      </div>
+
+      <div class="releases-grid">
+        {releases.map((release) => (
+          <article class="release-card">
+            <a href={`/${release.slug}`} class="card-thumb-wrap">
+              <img
+                src={release.data.cover_image || release.data.hero_image || `https://i.ytimg.com/vi/${release.data.youtube_id}/hqdefault.jpg`}
+                alt={release.data.title_roman}
+                class="card-thumb"
+                loading="lazy"
+              />
+            </a>
+            
+            <div class="card-content">
+              <div>
+                <h3 class="card-title-hi">
+                  <a href={`/${release.slug}`} lang="hi">
+                    {release.data.title_hi}
+                  </a>
+                </h3>
+                <p class="card-title-en" lang="en">
+                  {release.data.title_roman}
+                </p>
+              </div>
+
+              <div class="card-meta-row">
+                <span class="card-tag">{release.data.deity}</span>
+                <span class="card-tag">{release.data.dialect}</span>
+                {release.data.category && (
+                  <span class="card-tag">{release.data.category}</span>
+                )}
+                <span class="card-tag">{release.data.year}</span>
+              </div>
+            </div>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Community & Sangha Section (WhatsApp Channel & YouTube) -->
+  <section class="community-section" id="community">
+    <div class="container">
+      <div class="community-card">
+        <h2 class="community-title" lang="hi">धुनि परिवार से जुड़ें</h2>
+        <p class="community-sub">
+          दैनिक प्रातः वंदना, वैदिक शांति मंत्र, और आगामी शास्त्रीय भजनों के सीधे श्रवण हेतु हमारे आधिकारिक चैनलों से जुड़ें।
+        </p>
+
+        <div class="community-channels-row">
+          <a
+            href="https://whatsapp.com/channel/example-dhunilive"
+            class="btn-whatsapp"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <span>💬</span>
+            <span>व्हाट्सएप चैनल से जुड़ें</span>
+          </a>
+
+          <a
+            href="https://youtube.com/@DhuniLive?sub_confirmation=1"
+            class="btn-youtube-sub"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <span>▶</span>
+            <span>Subscribe on YouTube</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Site Footer -->
+  <footer class="site-footer">
+    <div class="container">
+      <p class="footer-creed" lang="hi">
+        धूनी — बहुत पुराने रास्ते, नए भजन
+      </p>
+      <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 1.5rem;">
+        A perpetual sacred fire, tended so it never goes out. Pure Indian Devotional Acoustics.
+      </p>
+
+      <ul class="footer-nav">
+        <li><a href="https://youtube.com/@DhuniLive" target="_blank" rel="noopener noreferrer">YouTube</a></li>
+        <li><a href="https://instagram.com/dhunilive.official" target="_blank" rel="noopener noreferrer">Instagram</a></li>
+        <li><a href="mailto:hello@dhunilive.com">Email / संपर्क</a></li>
+      </ul>
+
+      <p style="font-size: 0.8rem; color: #665f57;">
+        © {new Date().getFullYear()} Dhuni Live. All rights reserved. Sovereign Indian Media Architecture.
       </p>
     </div>
   </footer>
+
+  <!-- Lite Embed Dynamic Script -->
+  <script is:inline>
+    window.playHeroVideo = function playHeroVideo(videoId) {
+      const stage = document.getElementById('heroVideoStage');
+      if (!stage) return;
+      stage.innerHTML = `
+        <iframe
+          src="https://www.youtube-nocookie.com/embed/${videoId}?autoplay=1&rel=0&modestbranding=1"
+          title="Dhuni Live Video Player"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowfullscreen
+          style="width: 100%; height: 100%; border: none; position: absolute; top:0; left:0;"
+        ></iframe>
+      `;
+    };
+  </script>
 
 </Base>

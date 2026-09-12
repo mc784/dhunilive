@@ -24,15 +24,15 @@ const jsonLd = {
   alternateName: data.title_roman,
   byArtist: {
     '@type': 'MusicGroup',
-    name: 'Dhuni',
-    alternateName: 'धूनी',
+    name: 'Dhuni Live',
+    alternateName: 'धूनी लाइव',
   },
   inAlbum: {
     '@type': 'MusicAlbum',
-    name: 'Dhuni Singles',
+    name: 'Dhuni Sacred Classics',
   },
-  genre: 'Bhajan',
-  inLanguage: 'hi',
+  genre: 'Bhajan / Vedic Chant',
+  inLanguage: data.dialect,
   datePublished: data.release_date.toISOString(),
   url: `https://dhunilive.com/${release.slug}`,
   ...(data.youtube_id && {
@@ -40,132 +40,237 @@ const jsonLd = {
   }),
 };
 
-const title = `${data.title_hi} — ${data.title_roman} | Dhuni`;
-const description = `${data.deity} bhajan in ${data.dialect} dialect. Singer: ${data.credits.singer}. ${data.rights_status === 'traditional' ? 'Traditional composition' : 'Original composition'}.`;
+const title = `${data.title_hi} — ${data.title_roman} | Dhuni Live`;
+const description = `${data.deity} bhajan & shloka in ${data.dialect}. Singer: ${data.credits.singer}. Traditional Indian devotional acoustics.`;
+
+const posterImg = data.hero_image || data.cover_image || `https://i.ytimg.com/vi/${data.youtube_id}/maxresdefault.jpg`;
 ---
 
 <Base title={title} description={description} jsonLd={jsonLd}>
+
+  <!-- Top Navigation Bar -->
+  <nav class="site-nav">
+    <div class="container-wide site-nav-inner">
+      <a href="/" class="brand-badge">
+        <img src="/media/dhuni_logo.png" alt="Dhuni Live Emblem" class="brand-emblem" />
+        <div class="brand-text">
+          <span class="brand-title-hi">धूनी</span>
+          <span class="brand-title-en">Dhuni Live</span>
+        </div>
+      </a>
+
+      <ul class="nav-links">
+        <li><a href="/#releases">← सभी प्रस्तुतियाँ (All Releases)</a></li>
+        <li><a href="https://youtube.com/@DhuniLive" target="_blank" rel="noopener noreferrer">YouTube</a></li>
+        <li><a href="https://instagram.com/dhunilive.official" target="_blank" rel="noopener noreferrer">Instagram</a></li>
+      </ul>
+    </div>
+  </nav>
 
   <main>
     <div class="container">
 
       <!-- Release Header -->
-      <header class="release-header">
-        <h1 class="release-detail-title" lang="hi">{data.title_hi}</h1>
-        <p class="release-title-roman" lang="en">{data.title_roman}</p>
+      <header class="release-detail-header">
+        <span class="detail-deity-pill">
+          {data.deity} {data.deity_form ? `• ${data.deity_form}` : ''}
+        </span>
+        
+        <h1 class="detail-title-hi" lang="hi">{data.title_hi}</h1>
+        <p class="detail-title-en" lang="en">{data.title_roman}</p>
+      </header>
 
-        <!-- Metadata -->
-        <div class="release-metadata">
-          <div class="metadata-grid">
-            <div class="metadata-item">
-              <span class="metadata-label" lang="en">Deity</span>
-              <span class="metadata-value" lang="en">{data.deity} — {data.deity_form}</span>
-            </div>
-            <div class="metadata-item">
-              <span class="metadata-label" lang="en">Dialect</span>
-              <span class="metadata-value" lang="en">{data.dialect}</span>
-            </div>
-            {data.raga && (
-              <div class="metadata-item">
-                <span class="metadata-label" lang="en">Raga</span>
-                <span class="metadata-value" lang="en">{data.raga}</span>
-              </div>
-            )}
-            {data.taal && (
-              <div class="metadata-item">
-                <span class="metadata-label" lang="en">Taal</span>
-                <span class="metadata-value" lang="en">{data.taal}</span>
-              </div>
-            )}
-            {data.bpm && (
-              <div class="metadata-item">
-                <span class="metadata-label" lang="en">Tempo</span>
-                <span class="metadata-value" lang="en">{data.bpm} BPM</span>
-              </div>
-            )}
-            <div class="metadata-item">
-              <span class="metadata-label" lang="en">Year</span>
-              <span class="metadata-value" lang="en">{data.year}</span>
+      <!-- Dual-Format Switcher (16:9 Dhyana vs 9:16 Short) -->
+      <div class="format-toggle-bar">
+        <button
+          id="btn16x9"
+          class="format-btn active"
+          onclick="switchFormat('16x9')"
+        >
+          <span>📺</span>
+          <span>16:9 ध्यान जप (Widescreen Chanting)</span>
+        </button>
+
+        <button
+          id="btn9x16"
+          class="format-btn"
+          onclick="switchFormat('9x16')"
+        >
+          <span>📱</span>
+          <span>9:16 लघु दर्शन (Shorts & Reels)</span>
+        </button>
+      </div>
+
+      <!-- Format-Aware Media Stage -->
+      <div id="stageWrapper">
+        <!-- 16:9 Viewport (Default) -->
+        <div id="view16x9" class="video-stage-16x9">
+          <div
+            class="lite-embed-facade"
+            id="facade16x9"
+            style={`background-image: url('${posterImg}');`}
+            onclick={`loadEmbed('view16x9', '${data.youtube_16x9_id || data.youtube_id}')`}
+          >
+            <div class="play-button-gold" title="Play 16:9 Chanting Video">
+              <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
             </div>
           </div>
         </div>
-      </header>
 
-      <!-- YouTube Thumbnail Link (lite embed, no iframe) -->
-      {data.youtube_id && (
-        <a
-          href={`https://youtube.com/watch?v=${data.youtube_id}`}
-          class="youtube-thumbnail"
-          target="_blank"
-          rel="noopener noreferrer"
-          aria-label="Watch on YouTube"
-        >
-          <img
-            src={`https://i.ytimg.com/vi/${data.youtube_id}/maxresdefault.jpg`}
-            alt={`${data.title_roman} on YouTube`}
-            width="1280"
-            height="720"
-            loading="lazy"
-          />
-        </a>
-      )}
-
-      <!-- Streaming Links -->
-      {(data.spotify_url || data.jiosaavn_url || data.apple_url) && (
-        <div class="streaming-links">
-          {data.spotify_url && (
-            <a href={data.spotify_url} class="streaming-link" target="_blank" rel="noopener noreferrer" lang="en">
-              Spotify
-            </a>
-          )}
-          {data.jiosaavn_url && (
-            <a href={data.jiosaavn_url} class="streaming-link" target="_blank" rel="noopener noreferrer" lang="en">
-              JioSaavn
-            </a>
-          )}
-          {data.apple_url && (
-            <a href={data.apple_url} class="streaming-link" target="_blank" rel="noopener noreferrer" lang="en">
-              Apple Music
-            </a>
-          )}
+        <!-- 9:16 Vertical Phone Viewport (Hidden initially) -->
+        <div id="view9x16" class="video-stage-9x16" style="display: none;">
+          <div
+            class="lite-embed-facade"
+            id="facade9x16"
+            style={`background-image: url('${data.cover_image || posterImg}');`}
+            onclick={`loadEmbed('view9x16', '${data.youtube_short_id || data.youtube_id}')`}
+          >
+            <div class="play-button-gold" title="Play 9:16 Vertical Short">
+              <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+            </div>
+          </div>
         </div>
-      )}
-
-      <!-- Credits -->
-      <div class="credits">
-        <h3 lang="en">Credits</h3>
-        <ul class="credits-list">
-          <li><strong lang="en">Singer:</strong> <span lang="en">{data.credits.singer}</span></li>
-          {data.credits.lyrics && (
-            <li><strong lang="en">Lyrics:</strong> <span lang="en">{data.credits.lyrics}</span></li>
-          )}
-          {data.credits.music && (
-            <li><strong lang="en">Music:</strong> <span lang="en">{data.credits.music}</span></li>
-          )}
-          {data.credits.chorus && (
-            <li><strong lang="en">Chorus:</strong> <span lang="en">{data.credits.chorus}</span></li>
-          )}
-        </ul>
       </div>
 
-      <!-- Rights Attribution (if not original) -->
-      {data.rights_status !== 'original' && data.rights_note && (
-        <div class="rights-note">
-          <strong lang="en">Rights:</strong> <span lang="en">{data.rights_note}</span>
+      <!-- Dedicated Dhyana Audio Player (Listen while Chanting) -->
+      {data.audio_url && (
+        <div class="dhyana-audio-card">
+          <div class="dhyana-audio-info">
+            <span class="dhyana-icon">🕉️</span>
+            <div>
+              <div class="dhyana-title" lang="hi">सात्त्विक श्रवण एवं जप (Dhyana Audio)</div>
+              <div class="dhyana-sub">Mastered at -14 LUFS • Loop enabled for continuous prayer</div>
+            </div>
+          </div>
+
+          <audio
+            controls
+            loop
+            src={data.audio_url}
+            class="audio-element"
+            preload="metadata"
+          >
+            Your browser does not support the audio element.
+          </audio>
         </div>
       )}
 
-      <!-- Lyrics (server-rendered HTML from markdown) -->
-      <div class="lyrics-section">
+      <!-- Metadata & Musicology Grid -->
+      <div class="metadata-card-grid">
+        <div>
+          <div class="metadata-box-label">आराध्य • Deity</div>
+          <div class="metadata-box-val">{data.deity}</div>
+        </div>
+
+        <div>
+          <div class="metadata-box-label">भाषा • Dialect</div>
+          <div class="metadata-box-val">{data.dialect}</div>
+        </div>
+
+        {data.raga && (
+          <div>
+            <div class="metadata-box-label">राग • Raga</div>
+            <div class="metadata-box-val">{data.raga}</div>
+          </div>
+        )}
+
+        {data.taal && (
+          <div>
+            <div class="metadata-box-label">ताल • Taal</div>
+            <div class="metadata-box-val">{data.taal}</div>
+          </div>
+        )}
+
+        {data.bpm && (
+          <div>
+            <div class="metadata-box-label">लय • Tempo</div>
+            <div class="metadata-box-val">{data.bpm} BPM</div>
+          </div>
+        )}
+
+        <div>
+          <div class="metadata-box-label">स्वर • Singer</div>
+          <div class="metadata-box-val">{data.credits.singer}</div>
+        </div>
+      </div>
+
+      <!-- Sacred Lyrics, Meaning & Shloka Section -->
+      <div class="lyrics-container">
         <Content />
       </div>
 
-      <!-- Back Link -->
-      <p style="margin-top: 3rem; text-align: center;">
-        <a href="/" lang="en">← Back to all releases</a>
-      </p>
+      <!-- Rights & Spiritual Attribution -->
+      {data.rights_note && (
+        <div class="rights-note">
+          <strong lang="en">Rights & Attribution:</strong> {data.rights_note}
+        </div>
+      )}
+
+      <!-- Back Link & Social Share -->
+      <div style="margin: 3.5rem 0 2rem; text-align: center; display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap;">
+        <a href="/" class="btn-subtle">
+          <span>← सभी प्रस्तुतियाँ (Catalog)</span>
+        </a>
+        <a
+          href={`https://api.whatsapp.com/send?text=${encodeURIComponent(`॥ ${data.title_hi} ॥\nhttps://dhunilive.com/${release.slug}`)}`}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="btn-whatsapp"
+        >
+          <span>💬 WhatsApp पर साझा करें</span>
+        </a>
+      </div>
 
     </div>
   </main>
+
+  <!-- Site Footer -->
+  <footer class="site-footer">
+    <div class="container">
+      <p class="footer-creed" lang="hi">धूनी — बहुत पुराने रास्ते, नए भजन</p>
+      <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 1.5rem;">
+        A perpetual sacred fire, tended so it never goes out. Pure Indian Devotional Acoustics.
+      </p>
+      <p style="font-size: 0.8rem; color: #665f57;">
+        © {new Date().getFullYear()} Dhuni Live. All rights reserved. Sovereign Indian Media Architecture.
+      </p>
+    </div>
+  </footer>
+
+  <!-- Dynamic Format Switcher Script -->
+  <script is:inline>
+    window.switchFormat = function switchFormat(format) {
+      const btn16 = document.getElementById('btn16x9');
+      const btn9 = document.getElementById('btn9x16');
+      const view16 = document.getElementById('view16x9');
+      const view9 = document.getElementById('view9x16');
+
+      if (format === '16x9') {
+        if (btn16) btn16.classList.add('active');
+        if (btn9) btn9.classList.remove('active');
+        if (view16) view16.style.display = 'block';
+        if (view9) view9.style.display = 'none';
+      } else {
+        if (btn9) btn9.classList.add('active');
+        if (btn16) btn16.classList.remove('active');
+        if (view16) view16.style.display = 'none';
+        if (view9) view9.style.display = 'block';
+      }
+    };
+
+    window.loadEmbed = function loadEmbed(containerId, videoId) {
+      const container = document.getElementById(containerId);
+      if (!container) return;
+      container.innerHTML = `
+        <iframe
+          src="https://www.youtube-nocookie.com/embed/${videoId}?autoplay=1&rel=0&modestbranding=1"
+          title="Dhuni Live Video"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowfullscreen
+          style="width: 100%; height: 100%; border: none; position: absolute; top:0; left:0;"
+        ></iframe>
+      `;
+    };
+  </script>
 
 </Base>

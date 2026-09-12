@@ -58,7 +58,7 @@ const canonicalURL = new URL(Astro.url.pathname, siteUrl);
 
     <!-- JSON-LD Structured Data -->
     {jsonLd && (
-      <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+      <script type="application/ld+json" is:inline set:html={JSON.stringify(jsonLd)} />
     )}
   </head>
   <body>
