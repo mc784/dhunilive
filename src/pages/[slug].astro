@@ -227,9 +227,11 @@ const posterImg = data.hero_image || data.cover_image || `https://i.ytimg.com/vi
   <!-- Site Footer -->
   <footer class="site-footer">
     <div class="container">
-      <p class="footer-creed" lang="hi">धूनी — बहुत पुराने रास्ते, नए भजन</p>
-      <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 1.5rem;">
-        A perpetual sacred fire, tended so it never goes out. Pure Indian Devotional Acoustics.
+      <p class="footer-creed" lang="hi">
+        धूनी — शाश्वत स्वर • सांस्कृतिक चेतना • समसामयिक दृष्टि
+      </p>
+      <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 1.5rem; max-width: 680px; margin-left: auto; margin-right: auto;">
+        वैदिक मंत्रों और शास्त्रीय ध्वनियों से लेकर, भारत के समृद्ध इतिहास, सांस्कृतिक वृत्तचित्रों और समसामयिक विषयों के गहन विश्लेषण तक — एक संप्रभु, सात्त्विक भारतीय मंच।
       </p>
       <p style="font-size: 0.8rem; color: #665f57;">
         © {new Date().getFullYear()} Dhuni Live. All rights reserved. Sovereign Indian Media Architecture.
@@ -237,7 +239,7 @@ const posterImg = data.hero_image || data.cover_image || `https://i.ytimg.com/vi
     </div>
   </footer>
 
-  <!-- Dynamic Format Switcher Script -->
+  <!-- Dynamic Format Switcher Script with Auto Mobile Detection -->
   <script is:inline>
     window.switchFormat = function switchFormat(format) {
       const btn16 = document.getElementById('btn16x9');
@@ -271,6 +273,18 @@ const posterImg = data.hero_image || data.cover_image || `https://i.ytimg.com/vi
         ></iframe>
       `;
     };
+
+    // Auto-detect viewport on load: on phones (<= 768px), default to 9:16 vertical short!
+    function initDetailFormat() {
+      const isMobile = window.innerWidth <= 768;
+      window.switchFormat(isMobile ? '9x16' : '16x9');
+    }
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', initDetailFormat);
+    } else {
+      initDetailFormat();
+    }
   </script>
 
 </Base>

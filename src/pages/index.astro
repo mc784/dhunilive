@@ -24,8 +24,8 @@ const jsonLd = {
   description: 'Sacred Sanskrit shlokas, stutis, and traditional Indian devotional acoustics presented with sattvic reverence and world-class fidelity.',
 };
 
-const title = 'धूनी लाइव • Dhuni Live — Sacred Indian Devotional Music & Vedic Chants';
-const description = 'बहुत पुराने रास्ते, नए भजन | Sacred Sanskrit shlokas, dhyana chanting loops, and traditional Indian devotional acoustics.';
+const title = 'धूनी • Dhuni Live — शाश्वत स्वर, सांस्कृतिक चेतना एवं समसामयिक दृष्टि';
+const description = 'वैदिक ऋचाओं और शास्त्रीय संगीत से लेकर, भारत के समृद्ध इतिहास, सांस्कृतिक वृत्तचित्रों और समसामयिक विषयों के गहन विश्लेषण तक — धुनि लाइव।';
 ---
 
 <Base title={title} description={description} jsonLd={jsonLd}>
@@ -55,7 +55,7 @@ const description = 'बहुत पुराने रास्ते, नए 
     </div>
   </nav>
 
-  <!-- Hero Theater (Featured Offering) -->
+  <!-- Hero Theater (Featured Offering with Responsive Dual-Format Support) -->
   {featuredRelease && (
     <section class="hero-theater">
       <div class="container-wide">
@@ -64,14 +64,48 @@ const description = 'बहुत पुराने रास्ते, नए 
 
             <!-- Video Player Theater Column -->
             <div class="hero-media-wrap">
-              <div class="video-stage-16x9" id="heroVideoStage">
+              <div class="format-toggle-bar" style="margin: 1rem auto;">
+                <button
+                  id="heroBtn16x9"
+                  class="format-btn active"
+                  onclick="window.switchHeroFormat('16x9')"
+                >
+                  <span>📺 16:9 ध्यान जप</span>
+                </button>
+                <button
+                  id="heroBtn9x16"
+                  class="format-btn"
+                  onclick="window.switchHeroFormat('9x16')"
+                >
+                  <span>📱 9:16 लघु दर्शन</span>
+                </button>
+              </div>
+
+              <!-- 16:9 Landscape Hero Stage -->
+              <div class="video-stage-16x9" id="heroView16x9">
                 <div
                   class="lite-embed-facade"
-                  id="heroFacade"
+                  id="heroFacade16x9"
                   style={`background-image: url('${featuredRelease.data.hero_image || featuredRelease.data.cover_image || `https://i.ytimg.com/vi/${featuredRelease.data.youtube_id}/maxresdefault.jpg`}');`}
-                  onclick={`playHeroVideo('${featuredRelease.data.youtube_short_id || featuredRelease.data.youtube_id}')`}
+                  onclick={`window.playHeroVideo('heroView16x9', '${featuredRelease.data.youtube_16x9_id || featuredRelease.data.youtube_id}')`}
                 >
-                  <div class="play-button-gold" title="Play Video">
+                  <div class="play-button-gold" title="Play 16:9 Chanting Video">
+                    <svg viewBox="0 0 24 24">
+                      <path d="M8 5v14l11-7z"/>
+                    </svg>
+                  </div>
+                </div>
+              </div>
+
+              <!-- 9:16 Vertical Hero Stage (Automatically shown on mobile) -->
+              <div class="video-stage-9x16" id="heroView9x16" style="display: none;">
+                <div
+                  class="lite-embed-facade"
+                  id="heroFacade9x16"
+                  style={`background-image: url('${featuredRelease.data.cover_image || featuredRelease.data.hero_image || `https://i.ytimg.com/vi/${featuredRelease.data.youtube_id}/maxresdefault.jpg`}');`}
+                  onclick={`window.playHeroVideo('heroView9x16', '${featuredRelease.data.youtube_short_id || featuredRelease.data.youtube_id}')`}
+                >
+                  <div class="play-button-gold" title="Play 9:16 Vertical Short">
                     <svg viewBox="0 0 24 24">
                       <path d="M8 5v14l11-7z"/>
                     </svg>
@@ -130,12 +164,20 @@ const description = 'बहुत पुराने रास्ते, नए 
     <div class="container-wide">
       <div class="catalog-header">
         <div>
-          <h2 class="catalog-title-hi" lang="hi">पावन प्रस्तुतियाँ</h2>
-          <span class="catalog-title-en" lang="en">Sacred Releases & Chants</span>
+          <h2 class="catalog-title-hi" lang="hi">प्रस्तुतियाँ एवं विमर्श</h2>
+          <span class="catalog-title-en" lang="en">Sacred Releases, Cultural Documentaries & Discourse</span>
         </div>
         <span class="hero-meta-pill" style="font-size: 0.85rem;">
           {releases.length} कृतियाँ उपलब्ध
         </span>
+      </div>
+
+      <!-- Category Pillars Filter -->
+      <div class="category-filters">
+        <span class="category-pill active">समस्त (All)</span>
+        <span class="category-pill">🕉️ शाश्वत मंत्र एवं भजन (Sacred Chants)</span>
+        <span class="category-pill">📜 सांस्कृतिक वृत्तचित्र (Cultural Narratives)</span>
+        <span class="category-pill">🏛️ समसामयिक विमर्श (Civilizational Unpacking)</span>
       </div>
 
       <div class="releases-grid">
@@ -177,13 +219,14 @@ const description = 'बहुत पुराने रास्ते, नए 
     </div>
   </section>
 
-  <!-- Community & Sangha Section (WhatsApp Channel & YouTube) -->
+  <!-- Community & Sangha Section (WhatsApp Channel, YouTube & Instagram) -->
   <section class="community-section" id="community">
     <div class="container">
       <div class="community-card">
-        <h2 class="community-title" lang="hi">धुनि परिवार से जुड़ें</h2>
+        <span class="sacred-badge" style="align-self: center; margin-bottom: 0.8rem;">॥ धूनी संघ • Sovereign Indic Media ॥</span>
+        <h2 class="community-title" lang="hi">धुनि मंच से जुड़ें • Join the Dhuni Collective</h2>
         <p class="community-sub">
-          दैनिक प्रातः वंदना, वैदिक शांति मंत्र, और आगामी शास्त्रीय भजनों के सीधे श्रवण हेतु हमारे आधिकारिक चैनलों से जुड़ें।
+          पावन वैदिक मंत्रों, पारंपरिक शास्त्रीय भजनों, भारत के इतिहास पर आधारित सांस्कृतिक वृत्तचित्रों, और समसामयिक घटनाओं के गंभीर सभ्यतागत विश्लेषण के लिए हमारे आधिकारिक चैनलों से जुड़ें। बिना किसी भ्रामक शोर के, सीधे आपके फोन पर।
         </p>
 
         <div class="community-channels-row">
@@ -204,7 +247,17 @@ const description = 'बहुत पुराने रास्ते, नए 
             rel="noopener noreferrer"
           >
             <span>▶</span>
-            <span>Subscribe on YouTube</span>
+            <span>YouTube चैनल</span>
+          </a>
+
+          <a
+            href="https://instagram.com/dhunilive.official"
+            class="btn-instagram"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <span>📷</span>
+            <span>Instagram फॉलो करें</span>
           </a>
         </div>
       </div>
@@ -215,13 +268,14 @@ const description = 'बहुत पुराने रास्ते, नए 
   <footer class="site-footer">
     <div class="container">
       <p class="footer-creed" lang="hi">
-        धूनी — बहुत पुराने रास्ते, नए भजन
+        धूनी — शाश्वत स्वर • सांस्कृतिक चेतना • समसामयिक दृष्टि
       </p>
-      <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 1.5rem;">
-        A perpetual sacred fire, tended so it never goes out. Pure Indian Devotional Acoustics.
+      <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 1.5rem; max-width: 680px; margin-left: auto; margin-right: auto;">
+        वैदिक मंत्रों और शास्त्रीय ध्वनियों से लेकर, भारत के समृद्ध इतिहास, सांस्कृतिक वृत्तचित्रों और समसामयिक विषयों के गहन विश्लेषण तक — एक संप्रभु, सात्त्विक भारतीय मंच।
       </p>
 
       <ul class="footer-nav">
+        <li><a href="#releases">प्रस्तुतियाँ (Catalog)</a></li>
         <li><a href="https://youtube.com/@DhuniLive" target="_blank" rel="noopener noreferrer">YouTube</a></li>
         <li><a href="https://instagram.com/dhunilive.official" target="_blank" rel="noopener noreferrer">Instagram</a></li>
         <li><a href="mailto:hello@dhunilive.com">Email / संपर्क</a></li>
@@ -233,10 +287,29 @@ const description = 'बहुत पुराने रास्ते, नए 
     </div>
   </footer>
 
-  <!-- Lite Embed Dynamic Script -->
+  <!-- Lite Embed Dynamic Script with Auto-Mobile Responsiveness -->
   <script is:inline>
-    window.playHeroVideo = function playHeroVideo(videoId) {
-      const stage = document.getElementById('heroVideoStage');
+    window.switchHeroFormat = function switchHeroFormat(format) {
+      const btn16 = document.getElementById('heroBtn16x9');
+      const btn9 = document.getElementById('heroBtn9x16');
+      const view16 = document.getElementById('heroView16x9');
+      const view9 = document.getElementById('heroView9x16');
+
+      if (format === '16x9') {
+        if (btn16) btn16.classList.add('active');
+        if (btn9) btn9.classList.remove('active');
+        if (view16) view16.style.display = 'block';
+        if (view9) view9.style.display = 'none';
+      } else {
+        if (btn9) btn9.classList.add('active');
+        if (btn16) btn16.classList.remove('active');
+        if (view16) view16.style.display = 'none';
+        if (view9) view9.style.display = 'block';
+      }
+    };
+
+    window.playHeroVideo = function playHeroVideo(containerId, videoId) {
+      const stage = document.getElementById(containerId);
       if (!stage) return;
       stage.innerHTML = `
         <iframe
@@ -248,6 +321,18 @@ const description = 'बहुत पुराने रास्ते, नए 
         ></iframe>
       `;
     };
+
+    // Auto-detect viewport on load: on phones (<= 768px), default to 9:16 vertical short!
+    function initHeroFormat() {
+      const isMobile = window.innerWidth <= 768;
+      window.switchHeroFormat(isMobile ? '9x16' : '16x9');
+    }
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', initHeroFormat);
+    } else {
+      initHeroFormat();
+    }
   </script>
 
 </Base>
