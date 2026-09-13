@@ -215,7 +215,7 @@ const description = 'वैदिक ऋचाओं और शास्त्�
           <article class="release-card">
             <a href={`/${release.slug}`} class="card-thumb-wrap">
               <img
-                src={release.data.cover_image || release.data.hero_image || `https://i.ytimg.com/vi/${release.data.youtube_id}/hqdefault.jpg`}
+                src={release.data.hero_image || release.data.cover_image || `https://i.ytimg.com/vi/${release.data.youtube_id}/hqdefault.jpg`}
                 alt={release.data.title_roman}
                 class="card-thumb"
                 loading="lazy"

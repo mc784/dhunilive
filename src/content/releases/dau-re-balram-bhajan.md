@@ -10,7 +10,7 @@ youtube_id: "8_XNiXMqRJI"
 youtube_16x9_id: "8_XNiXMqRJI"
 youtube_short_id: "kZ4_13gddg8"
 audio_url: "/media/dau_re_master.mp3"
-cover_image: "/media/dau_re_cover.jpg"
+cover_image: "/media/dau_re_cover_9x16.jpg"
 hero_image: "/media/dau_re_cover.jpg"
 featured: false
 category: "Bhajan & Kirtan"
