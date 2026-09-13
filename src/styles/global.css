@@ -405,6 +405,41 @@ a:hover {
   box-shadow: 0 0 15px rgba(212, 175, 55, 0.3);
 }
 
+/* Format Status Indicator (when only one edition is live) */
+.format-status-badge {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  margin-bottom: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.badge-active {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.35rem 0.9rem;
+  border-radius: 20px;
+  background: rgba(212, 175, 55, 0.12);
+  border: 1px solid var(--border-gold);
+  color: var(--gold-bright);
+  font-size: 0.82rem;
+  font-weight: 600;
+}
+
+.badge-upcoming {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.35rem 0.9rem;
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid var(--border-subtle);
+  color: var(--text-muted);
+  font-size: 0.8rem;
+}
+
 /* 16:9 Landscape Responsive Container */
 .video-stage-16x9 {
   position: relative;

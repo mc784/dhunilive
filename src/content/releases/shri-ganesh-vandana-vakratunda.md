@@ -13,9 +13,6 @@ cover_image: "/media/ganesh_promo_1x1.jpg"
 hero_image: "/media/ganesh_sanctum_hero.jpg"
 featured: true
 category: "Mantra & Shloka"
-raga: "Bhairavi Ang"
-taal: "Keherwa (8-Matra)"
-bpm: 81
 rights_status: "traditional"
 rights_note: "पारंपरिक संस्कृत श्लोक एवं मूल काव्य भावार्थ अनुवाद, धूनी लाइव द्वारा प्रस्तुत"
 credits:
@@ -51,6 +48,6 @@ Nirvighna karo mere dev, saare karya sarvada ||
 
 ## Releases & Editions
 
-* **9:16 Vertical Short (Official Short):** Features sacred Sanskrit shloka and poetic Hindi anuvaad (37s).
-* **16:9 Landscape Dhyana Edition (एकादश आवर्तन — 11 Sacred Chanting Cycles):** Pure Sanskrit meditative chanting loop (3m 34s) mastered to EBU R128 (-14 LUFS) for Smart TV puja playback and morning prayer.
+* **9:16 Vertical Short (Official Short):** Features sacred Sanskrit shloka and poetic Hindi anuvaad (37s). Available now.
+* **16:9 Landscape Dhyana Edition (एकादश आवर्तन — 11 Sacred Chanting Cycles):** Pure Sanskrit meditative chanting loop mastered to EBU R128 (-14 LUFS) for Smart TV puja playback — शीघ्र उपलब्ध (Coming Soon).
   

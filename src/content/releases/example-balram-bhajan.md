@@ -5,9 +5,6 @@ slug: "baldau-ji-ki-aarti"
 deity: "Balram"
 deity_form: "Dauji of Baldeo"
 dialect: "Braj"
-raga: "Bhairavi"
-taal: "Keherwa"
-bpm: 90
 year: 2024
 release_date: 2024-03-15
 youtube_id: "LWou9wHr0Pk"

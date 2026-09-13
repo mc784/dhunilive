@@ -44,6 +44,9 @@ const title = `${data.title_hi} — ${data.title_roman} | Dhuni Live`;
 const description = `${data.deity} bhajan & shloka in ${data.dialect}. Singer: ${data.credits.singer}. Traditional Indian devotional acoustics.`;
 
 const posterImg = data.hero_image || data.cover_image || `https://i.ytimg.com/vi/${data.youtube_id}/maxresdefault.jpg`;
+const has16x9 = Boolean(data.youtube_16x9_id);
+const has9x16 = Boolean(data.youtube_short_id || (!has16x9 && data.youtube_id));
+const hasBothFormats = has16x9 && has9x16;
 ---
 
 <Base title={title} description={description} jsonLd={jsonLd}>
@@ -80,56 +83,79 @@ const posterImg = data.hero_image || data.cover_image || `https://i.ytimg.com/vi
         <p class="detail-title-en" lang="en">{data.title_roman}</p>
       </header>
 
-      <!-- Dual-Format Switcher (16:9 Dhyana vs 9:16 Short) -->
-      <div class="format-toggle-bar">
-        <button
-          id="btn16x9"
-          class="format-btn active"
-          onclick="switchFormat('16x9')"
-        >
-          <span>📺</span>
-          <span>16:9 ध्यान जप (Widescreen Chanting)</span>
-        </button>
+      <!-- Dual-Format Switcher or Single Format Status Indicator -->
+      {hasBothFormats && (
+        <div class="format-toggle-bar">
+          <button
+            id="btn16x9"
+            class="format-btn active"
+            onclick="window.switchFormat('16x9')"
+          >
+            <span>📺</span>
+            <span>16:9 ध्यान जप (Widescreen Chanting)</span>
+          </button>
 
-        <button
-          id="btn9x16"
-          class="format-btn"
-          onclick="switchFormat('9x16')"
-        >
-          <span>📱</span>
-          <span>9:16 लघु दर्शन (Shorts & Reels)</span>
-        </button>
-      </div>
+          <button
+            id="btn9x16"
+            class="format-btn"
+            onclick="window.switchFormat('9x16')"
+          >
+            <span>📱</span>
+            <span>9:16 लघु दर्शन (Shorts & Reels)</span>
+          </button>
+        </div>
+      )}
+
+      {has9x16 && !has16x9 && (
+        <div class="format-status-badge">
+          <span class="badge-active">📱 लघु दर्शन (Vertical Short)</span>
+          <span class="badge-upcoming">📺 16:9 ध्यान जप: संपादन जारी • Coming Soon</span>
+        </div>
+      )}
+
+      {has16x9 && !has9x16 && (
+        <div class="format-status-badge">
+          <span class="badge-active">📺 ध्यान जप (16:9 Widescreen)</span>
+        </div>
+      )}
 
       <!-- Format-Aware Media Stage -->
       <div id="stageWrapper">
-        <!-- 16:9 Viewport (Default) -->
-        <div id="view16x9" class="video-stage-16x9">
-          <div
-            class="lite-embed-facade"
-            id="facade16x9"
-            style={`background-image: url('${posterImg}');`}
-            onclick={`loadEmbed('view16x9', '${data.youtube_16x9_id || data.youtube_id}')`}
-          >
-            <div class="play-button-gold" title="Play 16:9 Chanting Video">
-              <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+        <!-- 16:9 Viewport (if available) -->
+        {has16x9 && (
+          <div class="video-stage-16x9" id="view16x9">
+            <div
+              class="lite-embed-facade"
+              id="facade16x9"
+              style={`background-image: url('${posterImg}');`}
+              onclick={`window.loadEmbed('view16x9', '${data.youtube_16x9_id}')`}
+            >
+              <div class="play-button-gold" title="Play 16:9 Chanting Video">
+                <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+              </div>
             </div>
           </div>
-        </div>
+        )}
 
-        <!-- 9:16 Vertical Phone Viewport (Hidden initially) -->
-        <div id="view9x16" class="video-stage-9x16" style="display: none;">
+        <!-- 9:16 Vertical Phone Viewport (if available) -->
+        {has9x16 && (
           <div
-            class="lite-embed-facade"
-            id="facade9x16"
-            style={`background-image: url('${data.cover_image || posterImg}');`}
-            onclick={`loadEmbed('view9x16', '${data.youtube_short_id || data.youtube_id}')`}
+            class="video-stage-9x16"
+            id="view9x16"
+            style={hasBothFormats ? 'display: none;' : 'display: block;'}
           >
-            <div class="play-button-gold" title="Play 9:16 Vertical Short">
-              <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+            <div
+              class="lite-embed-facade"
+              id="facade9x16"
+              style={`background-image: url('${data.cover_image || posterImg}');`}
+              onclick={`window.loadEmbed('view9x16', '${data.youtube_short_id || data.youtube_id}')`}
+            >
+              <div class="play-button-gold" title="Play 9:16 Vertical Short">
+                <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+              </div>
             </div>
           </div>
-        </div>
+        )}
       </div>
 
       <!-- Dedicated Dhyana Audio Player (Listen while Chanting) -->
@@ -155,7 +181,7 @@ const posterImg = data.hero_image || data.cover_image || `https://i.ytimg.com/vi
         </div>
       )}
 
-      <!-- Metadata & Musicology Grid -->
+      <!-- Metadata Grid (Raag, Taal & BPM removed) -->
       <div class="metadata-card-grid">
         <div>
           <div class="metadata-box-label">आराध्य • Deity</div>
@@ -167,24 +193,10 @@ const posterImg = data.hero_image || data.cover_image || `https://i.ytimg.com/vi
           <div class="metadata-box-val">{data.dialect}</div>
         </div>
 
-        {data.raga && (
+        {data.category && (
           <div>
-            <div class="metadata-box-label">राग • Raga</div>
-            <div class="metadata-box-val">{data.raga}</div>
-          </div>
-        )}
-
-        {data.taal && (
-          <div>
-            <div class="metadata-box-label">ताल • Taal</div>
-            <div class="metadata-box-val">{data.taal}</div>
-          </div>
-        )}
-
-        {data.bpm && (
-          <div>
-            <div class="metadata-box-label">लय • Tempo</div>
-            <div class="metadata-box-val">{data.bpm} BPM</div>
+            <div class="metadata-box-label">विधा • Category</div>
+            <div class="metadata-box-val">{data.category}</div>
           </div>
         )}
 
@@ -274,10 +286,18 @@ const posterImg = data.hero_image || data.cover_image || `https://i.ytimg.com/vi
       `;
     };
 
-    // Auto-detect viewport on load: on phones (<= 768px), default to 9:16 vertical short!
+    // Auto-detect viewport on load: only toggle if both formats exist
     function initDetailFormat() {
-      const isMobile = window.innerWidth <= 768;
-      window.switchFormat(isMobile ? '9x16' : '16x9');
+      const view16 = document.getElementById('view16x9');
+      const view9 = document.getElementById('view9x16');
+      if (view16 && view9) {
+        const isMobile = window.innerWidth <= 768;
+        window.switchFormat(isMobile ? '9x16' : '16x9');
+      } else if (view9) {
+        view9.style.display = 'block';
+      } else if (view16) {
+        view16.style.display = 'block';
+      }
     }
 
     if (document.readyState === 'loading') {

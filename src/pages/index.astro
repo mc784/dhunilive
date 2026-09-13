@@ -8,6 +8,9 @@ const releases = (await getCollection('releases'))
   .sort((a, b) => b.data.release_date.getTime() - a.data.release_date.getTime());
 
 const featuredRelease = releases.find(r => r.data.featured) || releases[0];
+const featuredHas16x9 = Boolean(featuredRelease?.data.youtube_16x9_id);
+const featuredHas9x16 = Boolean(featuredRelease?.data.youtube_short_id || (!featuredHas16x9 && featuredRelease?.data.youtube_id));
+const featuredHasBoth = featuredHas16x9 && featuredHas9x16;
 
 // JSON-LD for MusicGroup
 const jsonLd = {
@@ -64,54 +67,77 @@ const description = 'वैदिक ऋचाओं और शास्त्�
 
             <!-- Video Player Theater Column -->
             <div class="hero-media-wrap">
-              <div class="format-toggle-bar" style="margin: 1rem auto;">
-                <button
-                  id="heroBtn16x9"
-                  class="format-btn active"
-                  onclick="window.switchHeroFormat('16x9')"
-                >
-                  <span>📺 16:9 ध्यान जप</span>
-                </button>
-                <button
-                  id="heroBtn9x16"
-                  class="format-btn"
-                  onclick="window.switchHeroFormat('9x16')"
-                >
-                  <span>📱 9:16 लघु दर्शन</span>
-                </button>
-              </div>
+              {featuredHasBoth && (
+                <div class="format-toggle-bar" style="margin: 1rem auto;">
+                  <button
+                    id="heroBtn16x9"
+                    class="format-btn active"
+                    onclick="window.switchHeroFormat('16x9')"
+                  >
+                    <span>📺 16:9 ध्यान जप</span>
+                  </button>
+                  <button
+                    id="heroBtn9x16"
+                    class="format-btn"
+                    onclick="window.switchHeroFormat('9x16')"
+                  >
+                    <span>📱 9:16 लघु दर्शन</span>
+                  </button>
+                </div>
+              )}
 
-              <!-- 16:9 Landscape Hero Stage -->
-              <div class="video-stage-16x9" id="heroView16x9">
-                <div
-                  class="lite-embed-facade"
-                  id="heroFacade16x9"
-                  style={`background-image: url('${featuredRelease.data.hero_image || featuredRelease.data.cover_image || `https://i.ytimg.com/vi/${featuredRelease.data.youtube_id}/maxresdefault.jpg`}');`}
-                  onclick={`window.playHeroVideo('heroView16x9', '${featuredRelease.data.youtube_16x9_id || featuredRelease.data.youtube_id}')`}
-                >
-                  <div class="play-button-gold" title="Play 16:9 Chanting Video">
-                    <svg viewBox="0 0 24 24">
-                      <path d="M8 5v14l11-7z"/>
-                    </svg>
+              {featuredHas9x16 && !featuredHas16x9 && (
+                <div class="format-status-badge" style="margin: 1.25rem auto 0.75rem;">
+                  <span class="badge-active">📱 लघु दर्शन (Vertical Short)</span>
+                  <span class="badge-upcoming">📺 16:9 ध्यान जप: संपादन जारी • Coming Soon</span>
+                </div>
+              )}
+
+              {featuredHas16x9 && !featuredHas9x16 && (
+                <div class="format-status-badge" style="margin: 1.25rem auto 0.75rem;">
+                  <span class="badge-active">📺 ध्यान जप (16:9 Widescreen)</span>
+                </div>
+              )}
+
+              <!-- 16:9 Landscape Hero Stage (if available) -->
+              {featuredHas16x9 && (
+                <div class="video-stage-16x9" id="heroView16x9">
+                  <div
+                    class="lite-embed-facade"
+                    id="heroFacade16x9"
+                    style={`background-image: url('${featuredRelease.data.hero_image || featuredRelease.data.cover_image || `https://i.ytimg.com/vi/${featuredRelease.data.youtube_16x9_id}/maxresdefault.jpg`}');`}
+                    onclick={`window.playHeroVideo('heroView16x9', '${featuredRelease.data.youtube_16x9_id}')`}
+                  >
+                    <div class="play-button-gold" title="Play 16:9 Chanting Video">
+                      <svg viewBox="0 0 24 24">
+                        <path d="M8 5v14l11-7z"/>
+                      </svg>
+                    </div>
                   </div>
                 </div>
-              </div>
+              )}
 
-              <!-- 9:16 Vertical Hero Stage (Automatically shown on mobile) -->
-              <div class="video-stage-9x16" id="heroView9x16" style="display: none;">
+              <!-- 9:16 Vertical Hero Stage (if available) -->
+              {featuredHas9x16 && (
                 <div
-                  class="lite-embed-facade"
-                  id="heroFacade9x16"
-                  style={`background-image: url('${featuredRelease.data.cover_image || featuredRelease.data.hero_image || `https://i.ytimg.com/vi/${featuredRelease.data.youtube_id}/maxresdefault.jpg`}');`}
-                  onclick={`window.playHeroVideo('heroView9x16', '${featuredRelease.data.youtube_short_id || featuredRelease.data.youtube_id}')`}
+                  class="video-stage-9x16"
+                  id="heroView9x16"
+                  style={featuredHasBoth ? 'display: none;' : 'display: block; margin-top: 0.5rem;'}
                 >
-                  <div class="play-button-gold" title="Play 9:16 Vertical Short">
-                    <svg viewBox="0 0 24 24">
-                      <path d="M8 5v14l11-7z"/>
-                    </svg>
+                  <div
+                    class="lite-embed-facade"
+                    id="heroFacade9x16"
+                    style={`background-image: url('${featuredRelease.data.cover_image || featuredRelease.data.hero_image || `https://i.ytimg.com/vi/${featuredRelease.data.youtube_short_id || featuredRelease.data.youtube_id}/maxresdefault.jpg`}');`}
+                    onclick={`window.playHeroVideo('heroView9x16', '${featuredRelease.data.youtube_short_id || featuredRelease.data.youtube_id}')`}
+                  >
+                    <div class="play-button-gold" title="Play 9:16 Vertical Short">
+                      <svg viewBox="0 0 24 24">
+                        <path d="M8 5v14l11-7z"/>
+                      </svg>
+                    </div>
                   </div>
                 </div>
-              </div>
+              )}
             </div>
 
             <!-- Hero Information Column -->
@@ -128,11 +154,8 @@ const description = 'वैदिक ऋचाओं और शास्त्�
               <div class="hero-meta-row">
                 <span class="hero-meta-pill">आराध्य: {featuredRelease.data.deity}</span>
                 <span class="hero-meta-pill">भाषा: {featuredRelease.data.dialect}</span>
-                {featuredRelease.data.raga && (
-                  <span class="hero-meta-pill">राग: {featuredRelease.data.raga}</span>
-                )}
-                {featuredRelease.data.taal && (
-                  <span class="hero-meta-pill">ताल: {featuredRelease.data.taal}</span>
+                {featuredRelease.data.category && (
+                  <span class="hero-meta-pill">विधा: {featuredRelease.data.category}</span>
                 )}
               </div>
 
@@ -322,10 +345,18 @@ const description = 'वैदिक ऋचाओं और शास्त्�
       `;
     };
 
-    // Auto-detect viewport on load: on phones (<= 768px), default to 9:16 vertical short!
+    // Auto-detect viewport on load: only toggle if both formats exist
     function initHeroFormat() {
-      const isMobile = window.innerWidth <= 768;
-      window.switchHeroFormat(isMobile ? '9x16' : '16x9');
+      const view16 = document.getElementById('heroView16x9');
+      const view9 = document.getElementById('heroView9x16');
+      if (view16 && view9) {
+        const isMobile = window.innerWidth <= 768;
+        window.switchHeroFormat(isMobile ? '9x16' : '16x9');
+      } else if (view9) {
+        view9.style.display = 'block';
+      } else if (view16) {
+        view16.style.display = 'block';
+      }
     }
 
     if (document.readyState === 'loading') {
