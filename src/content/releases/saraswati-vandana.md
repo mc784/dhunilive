@@ -16,7 +16,7 @@ category: "Mantra & Shloka"
 rights_status: "traditional"
 rights_note: "पारंपरिक संस्कृत स्तोत्र, धूनी लाइव द्वारा ध्वन्यात्मक संयोजन"
 credits:
-  singer: "धुनि लाइव (Dhuni Live)"
+  singer: "धूनी लाइव (Dhuni Live)"
   lyrics: "पारंपरिक स्तोत्र"
   music: "Dhuni Live Acoustic Studio"
 draft: false

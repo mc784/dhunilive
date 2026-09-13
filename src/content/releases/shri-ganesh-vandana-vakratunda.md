@@ -16,7 +16,7 @@ category: "Mantra & Shloka"
 rights_status: "traditional"
 rights_note: "पारंपरिक संस्कृत श्लोक एवं मूल काव्य भावार्थ अनुवाद, धूनी लाइव द्वारा प्रस्तुत"
 credits:
-  singer: "धुनि लाइव (Dhuni Live)"
+  singer: "धूनी लाइव (Dhuni Live)"
   lyrics: "पारंपरिक श्लोक एवं भावार्थ"
   music: "Dhuni Live Acoustic Studio"
 draft: false

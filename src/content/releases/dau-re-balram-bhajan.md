@@ -17,7 +17,7 @@ category: "Bhajan & Kirtan"
 rights_status: "original"
 rights_note: "मूल ब्रज भक्ति रचना एवं संगीत संयोजन, धूनी लाइव"
 credits:
-  singer: "धुनि लाइव (Dhuni Live)"
+  singer: "धूनी लाइव (Dhuni Live)"
   lyrics: "पारंपरिक ब्रज भाव एवं धूनी लाइव"
   music: "Dhuni Live Acoustic Studio"
 draft: false
