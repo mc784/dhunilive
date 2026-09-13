@@ -95,19 +95,6 @@ const description = 'वैदिक ऋचाओं और शास्त्�
                 </div>
               )}
 
-              {featuredHas9x16 && !featuredHas16x9 && (
-                <div class="format-status-badge" style="margin: 1.25rem auto 0.75rem;">
-                  <span class="badge-active" data-i18n-hi="📱 लघु दर्शन (Vertical Short)" data-i18n-en="📱 9:16 Vertical Short">📱 लघु दर्शन (Vertical Short)</span>
-                  <span class="badge-upcoming" data-i18n-hi="📺 16:9 ध्यान जप: संपादन जारी • Coming Soon" data-i18n-en="📺 16:9 Widescreen Chanting: In Production • Coming Soon">📺 16:9 ध्यान जप: संपादन जारी • Coming Soon</span>
-                </div>
-              )}
-
-              {featuredHas16x9 && !featuredHas9x16 && (
-                <div class="format-status-badge" style="margin: 1.25rem auto 0.75rem;">
-                  <span class="badge-active" data-i18n-hi="📺 ध्यान जप (16:9 Widescreen)" data-i18n-en="📺 16:9 Meditative Chanting">📺 ध्यान जप (16:9 Widescreen)</span>
-                </div>
-              )}
-
               <!-- 16:9 Landscape Hero Stage (if available) -->
               {featuredHas16x9 && (
                 <div class="video-stage-16x9" id="heroView16x9">

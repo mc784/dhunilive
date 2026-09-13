@@ -70,10 +70,3 @@ The officials promised in writing, the sadhu stepped back aboard, and the train 
 * **Remember God:** In moments of hurry and stress, take three deep breaths and rest in still silence.
 
 *Truth never needs to shout. Truth creates its own space.*
-
----
-
-## Releases & Formats
-
-* **9:16 Vertical Short (लघु दर्शन):** 55-second cinematic reflection, atmospheric steam locomotive soundstage, and the DRC Baritone narrative voice.
-* **16:9 Landscape Documentary (दीर्घ दर्शन):** Full widescreen documentary exploring the true history of Neebkarori station, the sanctuary of Kainchi Dham, Steve Jobs and Mark Zuckerberg's visits, and freedom from modern noise.

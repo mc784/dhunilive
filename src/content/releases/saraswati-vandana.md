@@ -59,9 +59,3 @@ Sā Māṁ Pātu Sarasvatī Bhagavatī, Niḥśeṣa Jāḍya Apahā ||
 
 **English Meaning:**  
 Who is eternally praised and worshipped by Lord Brahma, Lord Vishnu, Lord Shiva, and all celestial beings; may that Supreme Divine Mother Goddess Saraswati protect us and completely eradicate all ignorance, inertia, and darkness from our consciousness.
-
----
-
-## Releases & Editions
-
-* **16:9 Landscape Widescreen Edition:** Mastered to EBU R128 (-14 LUFS) acoustic reference standard for temple sanctum listening and morning prayer.

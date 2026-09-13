@@ -60,10 +60,3 @@ Hātha meṁ hala aura mūsala sohai, mahimā aparaṁpārī ||
 
 **English Meaning:**  
 Consort of Devi Revati and earthly incarnation of Lord Ananta Shesha; you gracefully hold the plough and mace in your mighty hands. Boundless is your compassion and glory.
-
----
-
-## Releases & Editions
-
-* **16:9 Landscape Full Music Video:** Complete acoustic arrangement celebrating the brotherhood and divine bond of Shri Balram and Krishna.
-* **9:16 Vertical Short (Raksha Bandhan Special):** Dedicated short celebrating the eternal bond of trust, protection, and devotion.
