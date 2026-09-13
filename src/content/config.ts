@@ -13,7 +13,7 @@ const releases = defineCollection({
     bpm: z.number().optional(),
     year: z.number(),
     release_date: z.date(),
-    youtube_id: z.string(),
+    youtube_id: z.string().optional(),
     youtube_short_id: z.string().optional(),
     youtube_16x9_id: z.string().optional(),
     audio_url: z.string().optional(),
