@@ -45,14 +45,21 @@ const description = 'वैदिक ऋचाओं और शास्त्�
       </a>
 
       <ul class="nav-links">
-        <li><a href="#releases">प्रस्तुतियाँ (Catalog)</a></li>
-        <li><a href="https://youtube.com/@DhuniLive" target="_blank" rel="noopener noreferrer">यूट्यूब</a></li>
-        <li><a href="https://instagram.com/dhunilive.official" target="_blank" rel="noopener noreferrer">इंस्टाग्राम</a></li>
+        <li><a href="#releases" data-i18n-hi="प्रस्तुतियाँ (Catalog)" data-i18n-en="Catalog">प्रस्तुतियाँ (Catalog)</a></li>
+        <li><a href="https://youtube.com/@DhuniLive" target="_blank" rel="noopener noreferrer" data-i18n-hi="यूट्यूब" data-i18n-en="YouTube">यूट्यूब</a></li>
+        <li><a href="https://instagram.com/dhunilive.official" target="_blank" rel="noopener noreferrer" data-i18n-hi="इंस्टाग्राम" data-i18n-en="Instagram">इंस्टाग्राम</a></li>
         <li>
           <a href="#community" class="nav-cta-btn">
             <span>🌿</span>
-            <span>व्हाट्सएप चैनल</span>
+            <span data-i18n-hi="व्हाट्सएप चैनल" data-i18n-en="WhatsApp">व्हाट्सएप चैनल</span>
           </a>
+        </li>
+        <li>
+          <div class="lang-switch-pill" id="langSwitch">
+            <button class="lang-btn active" id="btnLangHi" onclick="window.setLanguage('hi')">हिन्दी</button>
+            <span class="lang-divider">|</span>
+            <button class="lang-btn" id="btnLangEn" onclick="window.setLanguage('en')">EN</button>
+          </div>
         </li>
       </ul>
     </div>
@@ -242,12 +249,12 @@ const description = 'वैदिक ऋचाओं और शास्त्�
     </div>
   </section>
 
-  <!-- Community & Sangha Section (WhatsApp Channel, YouTube & Instagram) -->
+  <!-- Community & Family Section (WhatsApp Channel, YouTube & Instagram) -->
   <section class="community-section" id="community">
     <div class="container">
       <div class="community-card">
-        <span class="sacred-badge" style="align-self: center; margin-bottom: 0.8rem;">॥ धूनी संघ • Sovereign Indic Media ॥</span>
-        <h2 class="community-title" lang="hi">धुनि मंच से जुड़ें • Join the Dhuni Collective</h2>
+        <span class="sacred-badge" style="align-self: center; margin-bottom: 0.8rem;" data-i18n-hi="॥ धुनि परिवार • Authentic Indic Cultural Media ॥" data-i18n-en="॥ Dhuni Collective • Authentic Indic Cultural Media ॥">॥ धुनि परिवार • Authentic Indic Cultural Media ॥</span>
+        <h2 class="community-title" lang="hi" data-i18n-hi="धुनि परिवार से जुड़ें" data-i18n-en="Join the Dhuni Collective">धुनि परिवार से जुड़ें</h2>
         <p class="community-sub">
           पावन वैदिक मंत्रों, पारंपरिक शास्त्रीय भजनों, भारत के इतिहास पर आधारित सांस्कृतिक वृत्तचित्रों, और समसामयिक घटनाओं के गंभीर सभ्यतागत विश्लेषण के लिए हमारे आधिकारिक चैनलों से जुड़ें। बिना किसी भ्रामक शोर के, सीधे आपके फोन पर।
         </p>
@@ -260,7 +267,7 @@ const description = 'वैदिक ऋचाओं और शास्त्�
             rel="noopener noreferrer"
           >
             <span>💬</span>
-            <span>व्हाट्सएप चैनल से जुड़ें</span>
+            <span data-i18n-hi="व्हाट्सएप चैनल से जुड़ें" data-i18n-en="Join WhatsApp Channel">व्हाट्सएप चैनल से जुड़ें</span>
           </a>
 
           <a
@@ -270,7 +277,7 @@ const description = 'वैदिक ऋचाओं और शास्त्�
             rel="noopener noreferrer"
           >
             <span>▶</span>
-            <span>YouTube चैनल</span>
+            <span data-i18n-hi="YouTube चैनल सब्सक्राइब करें" data-i18n-en="Subscribe on YouTube">YouTube चैनल</span>
           </a>
 
           <a
@@ -280,7 +287,7 @@ const description = 'वैदिक ऋचाओं और शास्त्�
             rel="noopener noreferrer"
           >
             <span>📷</span>
-            <span>Instagram फॉलो करें</span>
+            <span data-i18n-hi="Instagram पर जुड़ें" data-i18n-en="Follow on Instagram">Instagram फॉलो करें</span>
           </a>
         </div>
       </div>
@@ -294,23 +301,23 @@ const description = 'वैदिक ऋचाओं और शास्त्�
         धूनी — शाश्वत स्वर • सांस्कृतिक चेतना • समसामयिक दृष्टि
       </p>
       <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 1.5rem; max-width: 680px; margin-left: auto; margin-right: auto;">
-        वैदिक मंत्रों और शास्त्रीय ध्वनियों से लेकर, भारत के समृद्ध इतिहास, सांस्कृतिक वृत्तचित्रों और समसामयिक विषयों के गहन विश्लेषण तक — एक संप्रभु, सात्त्विक भारतीय मंच।
+        वैदिक मंत्रों और शास्त्रीय ध्वनियों से लेकर, भारत के समृद्ध इतिहास, सांस्कृतिक वृत्तचित्रों और समसामयिक विषयों के गहन विश्लेषण तक — एक मौलिक, सात्त्विक भारतीय मंच।
       </p>
 
       <ul class="footer-nav">
-        <li><a href="#releases">प्रस्तुतियाँ (Catalog)</a></li>
-        <li><a href="https://youtube.com/@DhuniLive" target="_blank" rel="noopener noreferrer">YouTube</a></li>
-        <li><a href="https://instagram.com/dhunilive.official" target="_blank" rel="noopener noreferrer">Instagram</a></li>
-        <li><a href="mailto:hello@dhunilive.com">Email / संपर्क</a></li>
+        <li><a href="#releases" data-i18n-hi="प्रस्तुतियाँ (Catalog)" data-i18n-en="Catalog">प्रस्तुतियाँ (Catalog)</a></li>
+        <li><a href="https://youtube.com/@DhuniLive" target="_blank" rel="noopener noreferrer" data-i18n-hi="YouTube" data-i18n-en="YouTube">YouTube</a></li>
+        <li><a href="https://instagram.com/dhunilive.official" target="_blank" rel="noopener noreferrer" data-i18n-hi="Instagram" data-i18n-en="Instagram">Instagram</a></li>
+        <li><a href="mailto:hello@dhunilive.com" data-i18n-hi="संपर्क (Email)" data-i18n-en="Contact (Email)">Email / संपर्क</a></li>
       </ul>
 
       <p style="font-size: 0.8rem; color: #665f57;">
-        © {new Date().getFullYear()} Dhuni Live. All rights reserved. Sovereign Indian Media Architecture.
+        © {new Date().getFullYear()} Dhuni Live. All rights reserved. Authentic Indian Cultural & Acoustic Media.
       </p>
     </div>
   </footer>
 
-  <!-- Lite Embed Dynamic Script with Auto-Mobile Responsiveness -->
+  <!-- Lite Embed Dynamic Script with Auto-Mobile Responsiveness & Language Switcher -->
   <script is:inline>
     window.switchHeroFormat = function switchHeroFormat(format) {
       const btn16 = document.getElementById('heroBtn16x9');
@@ -359,10 +366,44 @@ const description = 'वैदिक ऋचाओं और शास्त्�
       }
     }
 
+    // Discrete Language Switcher
+    window.setLanguage = function setLanguage(lang) {
+      const btnHi = document.getElementById('btnLangHi');
+      const btnEn = document.getElementById('btnLangEn');
+      if (lang === 'en') {
+        if (btnEn) btnEn.classList.add('active');
+        if (btnHi) btnHi.classList.remove('active');
+        document.documentElement.lang = 'en';
+      } else {
+        if (btnHi) btnHi.classList.add('active');
+        if (btnEn) btnEn.classList.remove('active');
+        document.documentElement.lang = 'hi';
+      }
+      try {
+        localStorage.setItem('dhuni_lang', lang);
+      } catch (e) {}
+
+      document.querySelectorAll('[data-i18n-hi]').forEach(el => {
+        const text = lang === 'en' ? el.getAttribute('data-i18n-en') : el.getAttribute('data-i18n-hi');
+        if (text) el.textContent = text;
+      });
+    };
+
+    function initLanguage() {
+      try {
+        const saved = localStorage.getItem('dhuni_lang') || 'hi';
+        window.setLanguage(saved);
+      } catch (e) {}
+    }
+
     if (document.readyState === 'loading') {
-      document.addEventListener('DOMContentLoaded', initHeroFormat);
+      document.addEventListener('DOMContentLoaded', () => {
+        initHeroFormat();
+        initLanguage();
+      });
     } else {
       initHeroFormat();
+      initLanguage();
     }
   </script>
 

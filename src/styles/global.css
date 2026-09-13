@@ -234,6 +234,42 @@ a:hover {
   box-shadow: 0 0 16px rgba(212, 175, 55, 0.45);
 }
 
+/* Language Switcher Pill */
+.lang-switch-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--border-subtle);
+  padding: 0.2rem 0.5rem;
+  border-radius: 20px;
+  font-size: 0.8rem;
+}
+
+.lang-btn {
+  background: none;
+  border: none;
+  color: var(--text-muted);
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 0.78rem;
+  padding: 0.15rem 0.4rem;
+  border-radius: 12px;
+  transition: all 0.2s ease;
+}
+
+.lang-btn.active,
+.lang-btn:hover {
+  color: var(--gold-bright);
+  background: rgba(212, 175, 55, 0.15);
+  font-weight: 600;
+}
+
+.lang-divider {
+  color: #554f48;
+  font-size: 0.72rem;
+}
+
 /* ============================================
    Featured Hero Theater
    ============================================ */
@@ -683,7 +719,7 @@ a:hover {
 }
 
 /* ============================================
-   Community / WhatsApp Sangha Section
+   Community / WhatsApp Dhuni Parivar Section
    ============================================ */
 
 .community-section {

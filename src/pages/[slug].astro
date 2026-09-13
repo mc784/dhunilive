@@ -63,9 +63,16 @@ const hasBothFormats = has16x9 && has9x16;
       </a>
 
       <ul class="nav-links">
-        <li><a href="/#releases">← सभी प्रस्तुतियाँ (All Releases)</a></li>
+        <li><a href="/#releases" data-i18n-hi="← सभी प्रस्तुतियाँ (All Releases)" data-i18n-en="← All Releases">← सभी प्रस्तुतियाँ (All Releases)</a></li>
         <li><a href="https://youtube.com/@DhuniLive" target="_blank" rel="noopener noreferrer">YouTube</a></li>
         <li><a href="https://instagram.com/dhunilive.official" target="_blank" rel="noopener noreferrer">Instagram</a></li>
+        <li>
+          <div class="lang-switch-pill" id="langSwitch">
+            <button class="lang-btn active" id="btnLangHi" onclick="window.setLanguage('hi')">हिन्दी</button>
+            <span class="lang-divider">|</span>
+            <button class="lang-btn" id="btnLangEn" onclick="window.setLanguage('en')">EN</button>
+          </div>
+        </li>
       </ul>
     </div>
   </nav>
@@ -220,7 +227,7 @@ const hasBothFormats = has16x9 && has9x16;
 
       <!-- Back Link & Social Share -->
       <div style="margin: 3.5rem 0 2rem; text-align: center; display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap;">
-        <a href="/" class="btn-subtle">
+        <a href="/" class="btn-subtle" data-i18n-hi="← सभी प्रस्तुतियाँ (Catalog)" data-i18n-en="← All Releases">
           <span>← सभी प्रस्तुतियाँ (Catalog)</span>
         </a>
         <a
@@ -228,6 +235,8 @@ const hasBothFormats = has16x9 && has9x16;
           target="_blank"
           rel="noopener noreferrer"
           class="btn-whatsapp"
+          data-i18n-hi="💬 WhatsApp पर साझा करें"
+          data-i18n-en="💬 Share on WhatsApp"
         >
           <span>💬 WhatsApp पर साझा करें</span>
         </a>
@@ -243,15 +252,15 @@ const hasBothFormats = has16x9 && has9x16;
         धूनी — शाश्वत स्वर • सांस्कृतिक चेतना • समसामयिक दृष्टि
       </p>
       <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 1.5rem; max-width: 680px; margin-left: auto; margin-right: auto;">
-        वैदिक मंत्रों और शास्त्रीय ध्वनियों से लेकर, भारत के समृद्ध इतिहास, सांस्कृतिक वृत्तचित्रों और समसामयिक विषयों के गहन विश्लेषण तक — एक संप्रभु, सात्त्विक भारतीय मंच।
+        वैदिक मंत्रों और शास्त्रीय ध्वनियों से लेकर, भारत के समृद्ध इतिहास, सांस्कृतिक वृत्तचित्रों और समसामयिक विषयों के गहन विश्लेषण तक — एक मौलिक, सात्त्विक भारतीय मंच।
       </p>
       <p style="font-size: 0.8rem; color: #665f57;">
-        © {new Date().getFullYear()} Dhuni Live. All rights reserved. Sovereign Indian Media Architecture.
+        © {new Date().getFullYear()} Dhuni Live. All rights reserved. Authentic Indian Cultural & Acoustic Media.
       </p>
     </div>
   </footer>
 
-  <!-- Dynamic Format Switcher Script with Auto Mobile Detection -->
+  <!-- Dynamic Format Switcher Script with Auto Mobile Detection & Language Switcher -->
   <script is:inline>
     window.switchFormat = function switchFormat(format) {
       const btn16 = document.getElementById('btn16x9');
@@ -300,10 +309,51 @@ const hasBothFormats = has16x9 && has9x16;
       }
     }
 
+    // Discrete Language Switcher
+    window.setLanguage = function setLanguage(lang) {
+      const btnHi = document.getElementById('btnLangHi');
+      const btnEn = document.getElementById('btnLangEn');
+      if (lang === 'en') {
+        if (btnEn) btnEn.classList.add('active');
+        if (btnHi) btnHi.classList.remove('active');
+        document.documentElement.lang = 'en';
+      } else {
+        if (btnHi) btnHi.classList.add('active');
+        if (btnEn) btnEn.classList.remove('active');
+        document.documentElement.lang = 'hi';
+      }
+      try {
+        localStorage.setItem('dhuni_lang', lang);
+      } catch (e) {}
+
+      document.querySelectorAll('[data-i18n-hi]').forEach(el => {
+        const text = lang === 'en' ? el.getAttribute('data-i18n-en') : el.getAttribute('data-i18n-hi');
+        if (text) {
+          const span = el.querySelector('span');
+          if (span) {
+            span.textContent = text;
+          } else {
+            el.textContent = text;
+          }
+        }
+      });
+    };
+
+    function initLanguage() {
+      try {
+        const saved = localStorage.getItem('dhuni_lang') || 'hi';
+        window.setLanguage(saved);
+      } catch (e) {}
+    }
+
     if (document.readyState === 'loading') {
-      document.addEventListener('DOMContentLoaded', initDetailFormat);
+      document.addEventListener('DOMContentLoaded', () => {
+        initDetailFormat();
+        initLanguage();
+      });
     } else {
       initDetailFormat();
+      initLanguage();
     }
   </script>
 
