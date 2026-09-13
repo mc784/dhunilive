@@ -8,7 +8,8 @@ year: 2026
 release_date: 2026-09-12
 youtube_id: "e3spGtjT8fo"
 youtube_short_id: "e3spGtjT8fo"
-audio_url: "/media/shri_ganesh_vandana_master.mp3"
+youtube_16x9_id: "Xlsaez45_ro"
+audio_url: "/media/shri_ganesh_vandana_11x_master.mp3"
 cover_image: "/media/ganesh_promo_1x1.jpg"
 hero_image: "/media/ganesh_sanctum_hero.jpg"
 featured: true
