@@ -6,8 +6,8 @@ deity_form: "Gajanan"
 dialect: "Sanskrit & Hindi"
 year: 2026
 release_date: 2026-09-13
-youtube_id: ""
-youtube_short_id: ""
+youtube_id: "ftZV1v50aQQ"
+youtube_short_id: "ftZV1v50aQQ"
 audio_url: "/media/gajanan_bhuta_ganadi_master.mp3"
 cover_image: "/media/gajanan_bhuta_ganadi_cover.jpg"
 hero_image: "/media/gajanan_bhuta_ganadi_hero.jpg"
