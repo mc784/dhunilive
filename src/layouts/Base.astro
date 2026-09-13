@@ -63,5 +63,102 @@ const canonicalURL = new URL(Astro.url.pathname, siteUrl);
   </head>
   <body>
     <slot />
+
+    <!-- Floating Sticky WhatsApp Channel Banner -->
+    <aside class="floating-wa-bar" id="floatingWaBar">
+      <div class="floating-wa-content">
+        <span class="floating-wa-icon">🌿</span>
+        <span class="floating-wa-text" data-i18n-hi="दैनिक प्रातः दर्शन एवं पावन श्लोक सीधे WhatsApp पर प्राप्त करें" data-i18n-en="Receive Daily Morning Darshan & Sacred Shlokas on WhatsApp">
+          दैनिक प्रातः दर्शन एवं पावन श्लोक सीधे WhatsApp पर प्राप्त करें
+        </span>
+      </div>
+      <a
+        href="https://whatsapp.com/channel/0029VbDdbaFIN9iua995UG3n"
+        class="floating-wa-btn"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        <span>जुड़ें • Join →</span>
+      </a>
+      <button class="floating-wa-close" onclick="document.getElementById('floatingWaBar').style.display='none'" aria-label="Close">×</button>
+    </aside>
+
+    <style is:inline>
+      .floating-wa-bar {
+        position: fixed;
+        bottom: 20px;
+        left: 50%;
+        transform: translateX(-50%);
+        z-index: 9999;
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        background: rgba(18, 14, 22, 0.94);
+        backdrop-filter: blur(14px);
+        -webkit-backdrop-filter: blur(14px);
+        border: 1px solid rgba(212, 175, 55, 0.45);
+        border-radius: 9999px;
+        padding: 8px 16px 8px 20px;
+        box-shadow: 0 10px 32px rgba(0, 0, 0, 0.6);
+        animation: floatIn 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        max-width: 92vw;
+      }
+      @keyframes floatIn {
+        from { opacity: 0; transform: translate(-50%, 20px); }
+        to { opacity: 1; transform: translate(-50%, 0); }
+      }
+      .floating-wa-content {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        font-size: 0.92rem;
+        color: #f2ede4;
+        white-space: nowrap;
+      }
+      .floating-wa-btn {
+        background: linear-gradient(135deg, #25D366, #128C7E);
+        color: #ffffff !important;
+        font-weight: 600;
+        font-size: 0.88rem;
+        padding: 6px 14px;
+        border-radius: 9999px;
+        text-decoration: none;
+        display: inline-flex;
+        align-items: center;
+        transition: transform 0.2s ease, filter 0.2s ease;
+        white-space: nowrap;
+      }
+      .floating-wa-btn:hover {
+        transform: scale(1.04);
+        filter: brightness(1.1);
+      }
+      .floating-wa-close {
+        background: none;
+        border: none;
+        color: #8c827a;
+        font-size: 1.2rem;
+        line-height: 1;
+        cursor: pointer;
+        padding: 0 4px;
+        transition: color 0.2s;
+      }
+      .floating-wa-close:hover {
+        color: #ffffff;
+      }
+      @media (max-width: 640px) {
+        .floating-wa-bar {
+          bottom: 12px;
+          padding: 6px 12px 6px 14px;
+          gap: 10px;
+        }
+        .floating-wa-text {
+          font-size: 0.78rem;
+        }
+        .floating-wa-btn {
+          font-size: 0.76rem;
+          padding: 5px 10px;
+        }
+      }
+    </style>
   </body>
 </html>
