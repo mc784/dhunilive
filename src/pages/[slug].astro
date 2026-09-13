@@ -86,8 +86,8 @@ const hasBothFormats = has16x9 && has9x16;
           {data.deity} {data.deity_form ? `• ${data.deity_form}` : ''}
         </span>
         
-        <h1 class="detail-title-hi" lang="hi">{data.title_hi}</h1>
-        <p class="detail-title-en" lang="en">{data.title_roman}</p>
+        <h1 class="detail-title-hi" lang="hi" id="detailTitle" data-i18n-hi={data.title_hi} data-i18n-en={data.title_roman}>{data.title_hi}</h1>
+        <p class="detail-title-en" lang="en" id="detailSub" data-i18n-hi={data.title_roman} data-i18n-en={data.title_hi}>{data.title_roman}</p>
       </header>
 
       <!-- Dual-Format Switcher or Single Format Status Indicator -->
@@ -99,7 +99,7 @@ const hasBothFormats = has16x9 && has9x16;
             onclick="window.switchFormat('16x9')"
           >
             <span>📺</span>
-            <span>16:9 ध्यान जप (Widescreen Chanting)</span>
+            <span data-i18n-hi="16:9 ध्यान जप (Widescreen Chanting)" data-i18n-en="16:9 Meditative Chanting">16:9 ध्यान जप (Widescreen Chanting)</span>
           </button>
 
           <button
@@ -108,21 +108,21 @@ const hasBothFormats = has16x9 && has9x16;
             onclick="window.switchFormat('9x16')"
           >
             <span>📱</span>
-            <span>9:16 लघु दर्शन (Shorts & Reels)</span>
+            <span data-i18n-hi="9:16 लघु दर्शन (Shorts & Reels)" data-i18n-en="9:16 Vertical Short (Shorts & Reels)">9:16 लघु दर्शन (Shorts & Reels)</span>
           </button>
         </div>
       )}
 
       {has9x16 && !has16x9 && (
         <div class="format-status-badge">
-          <span class="badge-active">📱 लघु दर्शन (Vertical Short)</span>
-          <span class="badge-upcoming">📺 16:9 ध्यान जप: संपादन जारी • Coming Soon</span>
+          <span class="badge-active" data-i18n-hi="📱 लघु दर्शन (Vertical Short)" data-i18n-en="📱 9:16 Vertical Short">📱 लघु दर्शन (Vertical Short)</span>
+          <span class="badge-upcoming" data-i18n-hi="📺 16:9 ध्यान जप: संपादन जारी • Coming Soon" data-i18n-en="📺 16:9 Widescreen Chanting: In Production • Coming Soon">📺 16:9 ध्यान जप: संपादन जारी • Coming Soon</span>
         </div>
       )}
 
       {has16x9 && !has9x16 && (
         <div class="format-status-badge">
-          <span class="badge-active">📺 ध्यान जप (16:9 Widescreen)</span>
+          <span class="badge-active" data-i18n-hi="📺 ध्यान जप (16:9 Widescreen)" data-i18n-en="📺 16:9 Meditative Chanting">📺 ध्यान जप (16:9 Widescreen)</span>
         </div>
       )}
 
@@ -171,8 +171,8 @@ const hasBothFormats = has16x9 && has9x16;
           <div class="dhyana-audio-info">
             <span class="dhyana-icon">🕉️</span>
             <div>
-              <div class="dhyana-title" lang="hi">सात्त्विक श्रवण एवं जप (Dhyana Audio)</div>
-              <div class="dhyana-sub">Mastered at -14 LUFS • Loop enabled for continuous prayer</div>
+              <div class="dhyana-title" lang="hi" data-i18n-hi="सात्त्विक श्रवण एवं जप (Dhyana Audio)" data-i18n-en="Sattvic Audio & Chanting Loop">सात्त्विक श्रवण एवं जप (Dhyana Audio)</div>
+              <div class="dhyana-sub" data-i18n-hi="मास्टरिंग: -14 LUFS • अखंड जप एवं पूजा हेतु स्वतः लूप" data-i18n-en="Mastered at -14 LUFS • Continuous loop enabled for daily prayer">Mastered at -14 LUFS • Loop enabled for continuous prayer</div>
             </div>
           </div>
 
@@ -191,24 +191,24 @@ const hasBothFormats = has16x9 && has9x16;
       <!-- Metadata Grid (Raag, Taal & BPM removed) -->
       <div class="metadata-card-grid">
         <div>
-          <div class="metadata-box-label">आराध्य • Deity</div>
+          <div class="metadata-box-label" data-i18n-hi="आराध्य" data-i18n-en="Deity">आराध्य • Deity</div>
           <div class="metadata-box-val">{data.deity}</div>
         </div>
 
         <div>
-          <div class="metadata-box-label">भाषा • Dialect</div>
+          <div class="metadata-box-label" data-i18n-hi="भाषा" data-i18n-en="Language / Dialect">भाषा • Dialect</div>
           <div class="metadata-box-val">{data.dialect}</div>
         </div>
 
         {data.category && (
           <div>
-            <div class="metadata-box-label">विधा • Category</div>
+            <div class="metadata-box-label" data-i18n-hi="विधा" data-i18n-en="Genre">विधा • Category</div>
             <div class="metadata-box-val">{data.category}</div>
           </div>
         )}
 
         <div>
-          <div class="metadata-box-label">स्वर • Singer</div>
+          <div class="metadata-box-label" data-i18n-hi="स्वर" data-i18n-en="Voice / Singer">स्वर • Singer</div>
           <div class="metadata-box-val">{data.credits.singer}</div>
         </div>
       </div>
@@ -221,14 +221,14 @@ const hasBothFormats = has16x9 && has9x16;
       <!-- Rights & Spiritual Attribution -->
       {data.rights_note && (
         <div class="rights-note">
-          <strong lang="en">Rights & Attribution:</strong> {data.rights_note}
+          <strong lang="en" data-i18n-hi="अधिकार एवं श्रेय:" data-i18n-en="Rights & Attribution:">Rights & Attribution:</strong> {data.rights_note}
         </div>
       )}
 
       <!-- Back Link & Social Share -->
       <div style="margin: 3.5rem 0 2rem; text-align: center; display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap;">
         <a href="/" class="btn-subtle" data-i18n-hi="← सभी प्रस्तुतियाँ (Catalog)" data-i18n-en="← All Releases">
-          <span>← सभी प्रस्तुतियाँ (Catalog)</span>
+          <span data-i18n-hi="← सभी प्रस्तुतियाँ (Catalog)" data-i18n-en="← All Releases">← सभी प्रस्तुतियाँ (Catalog)</span>
         </a>
         <a
           href={`https://api.whatsapp.com/send?text=${encodeURIComponent(`॥ ${data.title_hi} ॥\nhttps://dhunilive.com/${release.slug}`)}`}
@@ -238,7 +238,7 @@ const hasBothFormats = has16x9 && has9x16;
           data-i18n-hi="💬 WhatsApp पर साझा करें"
           data-i18n-en="💬 Share on WhatsApp"
         >
-          <span>💬 WhatsApp पर साझा करें</span>
+          <span data-i18n-hi="💬 WhatsApp पर साझा करें" data-i18n-en="💬 Share on WhatsApp">💬 WhatsApp पर साझा करें</span>
         </a>
       </div>
 
@@ -248,13 +248,13 @@ const hasBothFormats = has16x9 && has9x16;
   <!-- Site Footer -->
   <footer class="site-footer">
     <div class="container">
-      <p class="footer-creed" lang="hi">
+      <p class="footer-creed" lang="hi" data-i18n-hi="धूनी — शाश्वत स्वर • सांस्कृतिक चेतना • समसामयिक दृष्टि" data-i18n-en="Dhuni — Sacred Acoustics • Cultural Narratives • Civilizational Discourse">
         धूनी — शाश्वत स्वर • सांस्कृतिक चेतना • समसामयिक दृष्टि
       </p>
-      <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 1.5rem; max-width: 680px; margin-left: auto; margin-right: auto;">
+      <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 1.5rem; max-width: 680px; margin-left: auto; margin-right: auto;" data-i18n-hi="वैदिक मंत्रों और शास्त्रीय ध्वनियों से लेकर, भारत के समृद्ध इतिहास, सांस्कृतिक वृत्तचित्रों और समसामयिक विषयों के गहन विश्लेषण तक — एक मौलिक, सात्त्विक भारतीय मंच।" data-i18n-en="From sacred Vedic chants and acoustic Indian melodies to deep cultural documentaries and insightful civilizational perspectives on contemporary affairs — an authentic, sattvic Indian platform.">
         वैदिक मंत्रों और शास्त्रीय ध्वनियों से लेकर, भारत के समृद्ध इतिहास, सांस्कृतिक वृत्तचित्रों और समसामयिक विषयों के गहन विश्लेषण तक — एक मौलिक, सात्त्विक भारतीय मंच।
       </p>
-      <p style="font-size: 0.8rem; color: #665f57;">
+      <p style="font-size: 0.8rem; color: #665f57;" data-i18n-hi={`© ${new Date().getFullYear()} धूनी लाइव। सर्वाधिकार सुरक्षित। मौलिक भारतीय सांस्कृतिक एवं ध्वन्यात्मक मंच।`} data-i18n-en={`© ${new Date().getFullYear()} Dhuni Live. All rights reserved. Authentic Indian Cultural & Acoustic Media.`}>
         © {new Date().getFullYear()} Dhuni Live. All rights reserved. Authentic Indian Cultural & Acoustic Media.
       </p>
     </div>
@@ -329,12 +329,7 @@ const hasBothFormats = has16x9 && has9x16;
       document.querySelectorAll('[data-i18n-hi]').forEach(el => {
         const text = lang === 'en' ? el.getAttribute('data-i18n-en') : el.getAttribute('data-i18n-hi');
         if (text) {
-          const span = el.querySelector('span');
-          if (span) {
-            span.textContent = text;
-          } else {
-            el.textContent = text;
-          }
+          el.textContent = text;
         }
       });
     };
