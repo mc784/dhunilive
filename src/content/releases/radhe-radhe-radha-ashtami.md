@@ -18,7 +18,7 @@ credits:
   singer: "धूनी लाइव (Dhuni Live)"
   lyrics: "पारंपरिक ब्रज पद एवं धूनी लाइव"
   music: "Dhuni Live Acoustic Studio"
-draft: false
+draft: true
 ---
 
 ## ब्रज भाषा पद एवं भावार्थ (Hindi)
