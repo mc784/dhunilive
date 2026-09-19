@@ -6,8 +6,8 @@ deity_form: "Shri Ladli Ji of Barsana"
 dialect: "Braj"
 year: 2026
 release_date: 2026-09-19
-youtube_id: "aXOMymhVb1s"
-youtube_short_id: "aXOMymhVb1s"
+youtube_id: "xHteNpuvGS4"
+youtube_short_id: "xHteNpuvGS4"
 audio_url: "/media/radhe_radhe_master.mp3"
 cover_image: "/media/radhe_radhe_cover.jpg"
 featured: true
@@ -18,7 +18,7 @@ credits:
   singer: "धूनी लाइव (Dhuni Live)"
   lyrics: "पारंपरिक ब्रज पद एवं धूनी लाइव"
   music: "Dhuni Live Acoustic Studio"
-draft: true
+draft: false
 ---
 
 ## ब्रज भाषा पद एवं भावार्थ (Hindi)
