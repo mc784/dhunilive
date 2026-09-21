@@ -10,7 +10,7 @@ youtube_id: "xHteNpuvGS4"
 youtube_short_id: "xHteNpuvGS4"
 audio_url: "/media/radhe_radhe_master.mp3"
 cover_image: "/media/radhe_radhe_cover.jpg"
-featured: true
+featured: false
 category: "Bhajan & Kirtan"
 rights_status: "original"
 rights_note: "विशुद्ध ब्रज संकीर्तन एवं संगीत संयोजन, धूनी लाइव"

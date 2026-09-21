@@ -1,6 +1,6 @@
 ---
-title_hi: "दाऊ रे • श्री बलराम भजन"
-title_roman: "Dau Re • Shri Balram Bhajan"
+title_hi: "दाऊ रे • श्री बलराम जयंती विशेष"
+title_roman: "Dau Re • Shri Balarama Jayanti Special"
 deity: "Balram"
 deity_form: "Dauji of Baldeo"
 dialect: "Braj"

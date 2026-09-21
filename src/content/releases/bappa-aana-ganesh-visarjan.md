@@ -1,13 +1,14 @@
 ---
-title_hi: "बप्पा आना • गणेश विसर्जन एवं अनंत चतुर्दशी विशेष"
-title_roman: "Bappa Aana • Ganesh Visarjan & Anant Chaturdashi Anthem"
+title_hi: "बप्पा आना बप्पा आना • गणेश विसर्जन एवं अनंत चतुर्दशी विशेष"
+title_roman: "Bappa Aana Bappa Aana • Ganesh Visarjan & Anant Chaturdashi Anthem"
 deity: "Ganesha"
 deity_form: "Mangalmurti Bappa"
 dialect: "Hindi & Marathi"
 year: 2026
 release_date: 2026-09-25
-youtube_id: ""
-youtube_short_id: ""
+youtube_id: "STOS_usZooY"
+youtube_16x9_id: "STOS_usZooY"
+youtube_short_id: "PiBITy5Crow"
 audio_url: "/media/bappa_aana_master.mp3"
 cover_image: "/media/bappa_aana_cover.jpg"
 featured: true
