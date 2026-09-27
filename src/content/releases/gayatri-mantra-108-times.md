@@ -7,7 +7,7 @@ dialect: "Vedic Sanskrit & Hindi"
 year: 2026
 release_date: 2026-09-27
 youtube_id: "60astkOu51E"
-youtube_short_id: "2-L7WMK8o9g"
+youtube_short_id: "IPKjV0qdnYI"
 youtube_16x9_id: "60astkOu51E"
 audio_url: "/media/gayatri_mantra_108_master.mp3"
 cover_image: "/media/gayatri_mantra_cover.jpg"
