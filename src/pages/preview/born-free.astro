@@ -1,0 +1,383 @@
+---
+const pageTitle = "निजी पूर्वावलोकन (Private Preview) • स्वतंत्र भारत की आज़ाद पीढ़ी • Born Free in Independent India";
+const pageDesc = "निजी समीक्षा एवं पूर्वावलोकन मंच — धूनी लाइव एकॉस्टिक स्टूडियो";
+---
+
+<!doctype html>
+<html lang="hi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="noindex, nofollow" />
+    <title>{pageTitle}</title>
+    <meta name="description" content={pageDesc} />
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="स्वतंत्र भारत की आज़ाद पीढ़ी • Private Preview" />
+    <meta property="og:description" content="Dhuni Live Acoustic Studio • Private Documentary Teaser Preview" />
+    <meta property="og:image" content="/media/born_free_poster.png" />
+
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%231a1612'/%3E%3Ctext x='50' y='65' font-family='serif' font-size='60' fill='%23d4af37' text-anchor='middle'%3Eध%3C/text%3E%3C/svg%3E" />
+
+    <style>
+      :root {
+        --bg-deep: #0a0c10;
+        --bg-surface: #12151c;
+        --bg-card: #181d26;
+        --gold-primary: #d4af37;
+        --gold-glow: rgba(212, 175, 55, 0.25);
+        --text-primary: #f5f0e6;
+        --text-secondary: #c0c5d0;
+        --text-muted: #808898;
+        --border-color: #242b38;
+      }
+
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      body {
+        background-color: var(--bg-deep);
+        color: var(--text-primary);
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+        line-height: 1.6;
+        padding: 0;
+        margin: 0;
+      }
+
+      .preview-banner {
+        background: linear-gradient(90deg, #1e1508, #2a2010, #1e1508);
+        border-bottom: 1px solid rgba(212, 175, 55, 0.3);
+        padding: 10px 20px;
+        text-align: center;
+        font-size: 13px;
+        letter-spacing: 1px;
+        color: var(--gold-primary);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 12px;
+      }
+
+      .status-dot {
+        width: 8px;
+        height: 8px;
+        background: #10b981;
+        border-radius: 50%;
+        display: inline-block;
+        box-shadow: 0 0 8px #10b981;
+      }
+
+      .container {
+        max-width: 1080px;
+        margin: 0 auto;
+        padding: 30px 20px 80px 20px;
+      }
+
+      .header {
+        text-align: center;
+        margin-bottom: 32px;
+      }
+
+      .series-badge {
+        display: inline-block;
+        color: var(--gold-primary);
+        font-size: 14px;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        margin-bottom: 10px;
+        border: 1px solid rgba(212, 175, 55, 0.35);
+        padding: 4px 16px;
+        border-radius: 20px;
+        background: rgba(212, 175, 55, 0.05);
+      }
+
+      h1 {
+        font-size: 2.2rem;
+        font-weight: 700;
+        color: var(--text-primary);
+        margin-bottom: 8px;
+        line-height: 1.3;
+      }
+
+      .subtitle {
+        font-size: 1.15rem;
+        color: var(--text-secondary);
+        font-style: italic;
+        margin-bottom: 16px;
+      }
+
+      /* Stage Player Card */
+      .stage-card {
+        background: var(--bg-surface);
+        border: 1px solid var(--border-color);
+        border-radius: 16px;
+        overflow: hidden;
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
+        margin-bottom: 32px;
+      }
+
+      .format-switcher {
+        display: flex;
+        justify-content: center;
+        gap: 12px;
+        padding: 16px;
+        background: var(--bg-card);
+        border-bottom: 1px solid var(--border-color);
+      }
+
+      .tab-btn {
+        background: transparent;
+        border: 1px solid var(--border-color);
+        color: var(--text-secondary);
+        padding: 10px 24px;
+        border-radius: 8px;
+        font-size: 15px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+
+      .tab-btn.active {
+        background: var(--gold-primary);
+        color: #0a0c10;
+        border-color: var(--gold-primary);
+        box-shadow: 0 4px 12px var(--gold-glow);
+      }
+
+      .video-wrapper {
+        position: relative;
+        width: 100%;
+        background: #000;
+      }
+
+      video {
+        width: 100%;
+        height: auto;
+        max-height: 65vh;
+        display: block;
+        outline: none;
+      }
+
+      /* Audio Section */
+      .audio-section {
+        background: var(--bg-card);
+        border: 1px solid var(--border-color);
+        border-radius: 12px;
+        padding: 20px 24px;
+        margin-bottom: 32px;
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+      }
+
+      .audio-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .audio-title {
+        font-size: 16px;
+        font-weight: 600;
+        color: var(--gold-primary);
+      }
+
+      .audio-meta {
+        font-size: 13px;
+        color: var(--text-muted);
+      }
+
+      audio {
+        width: 100%;
+        border-radius: 8px;
+      }
+
+      /* Context & Script Accordion */
+      .context-grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 24px;
+        margin-top: 32px;
+      }
+
+      .info-card {
+        background: var(--bg-surface);
+        border: 1px solid var(--border-color);
+        border-radius: 12px;
+        padding: 24px;
+      }
+
+      .info-card h3 {
+        color: var(--gold-primary);
+        margin-bottom: 14px;
+        font-size: 18px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+
+      .script-quote {
+        background: rgba(0, 0, 0, 0.3);
+        border-left: 3px solid var(--gold-primary);
+        padding: 14px 18px;
+        border-radius: 0 8px 8px 0;
+        margin-bottom: 14px;
+        font-size: 15px;
+        color: #e5e9f0;
+        line-height: 1.7;
+      }
+
+      .footer {
+        text-align: center;
+        margin-top: 50px;
+        color: var(--text-muted);
+        font-size: 13px;
+      }
+
+      @media (max-width: 768px) {
+        h1 { font-size: 1.6rem; }
+        .subtitle { font-size: 1rem; }
+        .tab-btn { padding: 8px 16px; font-size: 14px; }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Private Review Top Banner -->
+    <div class="preview-banner">
+      <span class="status-dot"></span>
+      <span>निजी पूर्वावलोकन कक्ष • गोपनीय समीक्षा मंच (UNLISTED REVIEW STAGE)</span>
+    </div>
+
+    <div class="container">
+      <header class="header">
+        <span class="series-badge">धूनी लाइव वृत्तचित्र • भाग ०१ पूर्वावलोकन</span>
+        <h1>स्वतंत्र भारत की आज़ाद पीढ़ी</h1>
+        <p class="subtitle">Born Free in Independent India • Why Your Thoughts Aren't Yours</p>
+      </header>
+
+      <!-- Main Dual Video Stage -->
+      <div class="stage-card">
+        <div class="format-switcher">
+          <button class="tab-btn active" id="btn-hi" onclick="switchLanguage('hi')">
+            <span>🇮🇳</span> हिंदी प्रस्तुति (01:43)
+          </button>
+          <button class="tab-btn" id="btn-en" onclick="switchLanguage('en')">
+            <span>🇬🇧</span> English Edition (01:14)
+          </button>
+        </div>
+
+        <div class="video-wrapper">
+          <video id="main-video" controls playsinline preload="metadata" poster="/media/born_free_poster.png">
+            <source id="video-src" src="/media/born_free_hindi_teaser.mp4" type="video/mp4" />
+            आपका ब्राउज़र वीडियो टैग का समर्थन नहीं करता है।
+          </video>
+        </div>
+      </div>
+
+      <!-- Pristine Master Audio Stream -->
+      <div class="audio-section">
+        <div class="audio-header">
+          <div class="audio-title">🎙️ शुद्ध एकॉस्टिक मास्टर ऑडियो (Pure Master Audio Stream)</div>
+          <div class="audio-meta">EBU R128 (-14.0 LUFS) • 320 kbps MP3 • DRC Biological Voice Anchor</div>
+        </div>
+        <audio id="main-audio" controls preload="metadata">
+          <source id="audio-src" src="/media/born_free_hindi_master.mp3" type="audio/mpeg" />
+          आपका ब्राउज़र ऑडियो का समर्थन नहीं करता।
+        </audio>
+      </div>
+
+      <!-- Curated Literary Transcript -->
+      <div class="context-grid">
+        <div class="info-card">
+          <h3>📜 सूत्रधार का कथन (Narrative Transcript)</h3>
+          
+          <div id="transcript-hi">
+            <div class="script-quote">
+              “अगर आप १५ अगस्त १९४७ के बाद पैदा हुए हैं... तो आप एक बिल्कुल स्वाभाविक यक़ीन के साथ बड़े हुए हैं: कि आप आज़ाद हैं। आपके पास एक स्वतंत्र गणराज्य का पासपोर्ट है। आप आधुनिक तकनीक बनाते हैं, ग्लोबल फ़ाइनेंस संभालते हैं, और अपनी योग्यता के दम पर दुनिया भर में सम्मान पाते हैं।”
+            </div>
+            <div class="script-quote">
+              “ब्रिटिश हुकूमत आपके लिए सिर्फ स्कूल की किसी पुरानी किताब का एक सूखा पन्ना है। उसका आपकी रोज़मर्रा की ज़िंदगी से कोई लेना-देना नहीं है। लेकिन क्या वाकई ऐसा है?”
+            </div>
+            <div class="script-quote">
+              “सदियों पहले, भारत के पंचतंत्र ने एक कहानी कही थी—एक शेर के बच्चे की, जो भेड़ों के झुंड के बीच बड़ा हुआ... उसे शेरों से नफ़रत नहीं थी। उसे बस पता ही नहीं था कि वह खुद एक शेर है। १८४९ में, ठीक यही दास्तान भारत के एक असली राजकुमार के साथ घटी... दलीप सिंह—शेरे-पंजाब महाराजा रणजीत सिंह का बेटा। बचपन में माँ से अलग किया गया, विक्टोरियन अंग्रेज़ी लिबास पहनाया गया... और वह अपनी ही पैतृक विरासत की तरफ एक अजीब सी हिचक और शर्मिंदगी के साथ देखने लगा।”
+            </div>
+            <div class="script-quote">
+              “क्या हो अगर सोच की सबसे गहरी गुलामी... वो ज़ंजीरें न हों जो हाथों में दिखती हैं... बल्कि वो आदतें हों जिन पर आपने कभी सवाल ही न उठाया हो?”
+            </div>
+          </div>
+
+          <div id="transcript-en" style="display: none;">
+            <div class="script-quote">
+              “If you were born after August 15, 1947... you grew up with a quiet, unquestioned certainty: You were born free. You hold the passport of an independent republic. You build tech stacks, manage global capital, and move through the world on your own merit.”
+            </div>
+            <div class="script-quote">
+              “The British Empire is just an old chapter in a school textbook. It has nothing to do with you. Or does it?”
+            </div>
+            <div class="script-quote">
+              “Centuries ago, an ancient Indian text—the Panchatantra—told of a lion cub who grew up among sheep. He learned to bleat. He ate dry grass. When a wolf howled in the distance, he trembled in terror. He didn't hate lions. He simply had no idea he was one.”
+            </div>
+            <div class="script-quote">
+              “In 1849, that story happened to an actual Indian prince. Duleep Singh—son of Maharaja Ranjit Singh, the Lion of Punjab. Separated as a boy, dressed in Scottish tweed... he grew up looking at his own ancestral heritage with polite, aristocratic embarrassment.”
+            </div>
+            <div class="script-quote">
+              “What if the deepest form of conditioning... isn't the chain around your wrists... but the instincts you never thought to question?”
+            </div>
+          </div>
+        </div>
+
+        <div class="info-card">
+          <h3>🔬 स्टूडियो प्रोडक्शन मानक (Studio Standards & Audit)</h3>
+          <ul style="padding-left: 20px; color: var(--text-secondary); font-size: 14px; display: flex; flex-direction: column; gap: 8px;">
+            <li><strong>ध्वनि एंकर (Voice Anchor):</strong> DRC Biological Voice Clone (`ogM8FJycAGDctX4TxTCS`) via Eleven v4 engine.</li>
+            <li><strong>उच्चारण (Phonetic Precision):</strong> भारतीय ट/त का शुद्ध उच्चारण (Retroflex plosives [ʈ]), प्राकृतिक ठहराव और सांस लेने की विराम-योजना।</li>
+            <li><strong>डीएसपी मास्टरिंग (DSP Mastering):</strong> EBU R128 ब्रॉडकास्ट मानक (-14.0 LUFS, -1.0 dBFS True Peak), शून्य हम (Zero Hum), विशुद्ध शांत विराम (-70.8 dBFS)।</li>
+            <li><strong>दृश्य कोलाज (Visual Collage):</strong> 35mm फोटो-जर्नलिज्म, १५ अगस्त १९४७ हिंदुस्तान टाइम्स का मूल पन्ना, प्राचीन पंचतंत्र ताड़पत्र पांडुलिपि, एवं ऑसबोर्न हाउस १८५४ के ऐतिहासिक साक्ष्य।</li>
+          </ul>
+        </div>
+      </div>
+
+      <footer class="footer">
+        <p>धूनी — शाश्वत स्वर • सांस्कृतिक चेतना • समसामयिक दृष्टि</p>
+        <p style="margin-top: 6px; font-size: 11px; opacity: 0.6;">Dhuni Live Acoustic Studio • Private Staging • Zero Vendor Attribution</p>
+      </footer>
+    </div>
+
+    <script is:inline>
+      function switchLanguage(lang) {
+        const video = document.getElementById('main-video');
+        const vsrc = document.getElementById('video-src');
+        const btnHi = document.getElementById('btn-hi');
+        const btnEn = document.getElementById('btn-en');
+        const tHi = document.getElementById('transcript-hi');
+        const tEn = document.getElementById('transcript-en');
+
+        const wasPlaying = !video.paused;
+
+        if (lang === 'hi') {
+          vsrc.src = '/media/born_free_hindi_teaser.mp4';
+          btnHi.classList.add('active');
+          btnEn.classList.remove('active');
+          tHi.style.display = 'block';
+          tEn.style.display = 'none';
+        } else {
+          vsrc.src = '/media/born_free_english_teaser.mp4';
+          btnEn.classList.add('active');
+          btnHi.classList.remove('active');
+          tEn.style.display = 'block';
+          tHi.style.display = 'none';
+        }
+
+        video.load();
+        if (wasPlaying) {
+          video.play().catch(() => {});
+        }
+      }
+    </script>
+  </body>
+</html>
